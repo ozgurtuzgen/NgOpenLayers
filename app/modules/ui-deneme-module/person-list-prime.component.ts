@@ -8,12 +8,16 @@ import {OnInit} from "@angular/core";
     template: `
     <div>
     Prime
-        <p-dataTable [value]="personList">
-            <p-column field="id" header="ID"></p-column>
-            <p-column field="ad" header="Adı"></p-column>
-            <p-column field="soyad" header="Enlem"></p-column>
-            <p-column field="yas" header="Boylam"></p-column>
+        <input #gb type="text" placeholder="Global search">
+        <p-dataTable [value]="personList" [sortMode]="multiple" [globalFilter]="gb"  selectionMode="single" [(selection)]="selectedPerson" [responsive]="true">
+            <p-column field="id" header="id"  sortable="true" [filter]="true"></p-column>
+            <p-column field="ad" header="Ad" sortable="true" [filter]="true"></p-column>
+            <p-column field="soyad" header="Soyad" sortable="true" [filter]="true"></p-column>
+            <p-column field="yas" header="Yaş" sortable="true" [filter]="true"></p-column>
         </p-dataTable>
+        <div *ngIf = "selectedPerson">
+            {{selectedPerson.ad}} {{selectedPerson.soyad}} {{selectedPerson.yas}}
+        </div>
     </div>
     `,
     providers: [PersonService]
@@ -25,8 +29,9 @@ export class PersonListComponentPrime implements OnInit {
         this.getPersonList();
     }
 
-    
     personList: Person[];
+
+    selectedPerson : Person;
 
     getPersonList(): void {
         this.personService.getPersonList().then(personList=>this.personList = personList);

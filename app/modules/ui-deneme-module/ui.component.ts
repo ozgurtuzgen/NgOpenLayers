@@ -1,13 +1,24 @@
 import { Component } from '@angular/core';
-import {PersonListComponentPrime} from "./person-list-prime.component"
 
 @Component({
   moduleId: module.id,
   selector: 'ui-deneme',
   template: `
-    <div>
-       <person-list-prime id="deneme"></person-list-prime>
-    </div>
+    <table>
+       <tr>
+         <td>
+            <person-list-prime id="deneme"></person-list-prime>
+         </td>
+         <td> 
+             <person-list-kendo id="deneme2"></person-list-kendo>
+         </td>
+       </tr>
+       <tr>
+         <td></td>
+         <td></td>
+       </tr>
+     </table>
+
   `,
 })
 export class UiComponent {
