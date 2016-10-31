@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
+import {PersonListComponentPrime} from "./person-list-prime.component"
 
 @Component({
   moduleId: module.id,
   selector: 'ui-deneme',
   template: `
-       <h1>{{title}}</h1>
+    <div>
+       <person-list-prime id="deneme"></person-list-prime>
+    </div>
   `,
 })
 export class UiComponent {
-  title = 'aaa';
+
 }

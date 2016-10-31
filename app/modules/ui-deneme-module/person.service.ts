@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PersonService{
-    getCityList():Promise<Person[]>{
+    getPersonList():Promise<Person[]>{
         return Promise.resolve(PersonList);
     }
 }

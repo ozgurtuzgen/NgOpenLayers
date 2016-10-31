@@ -2,25 +2,24 @@ import {Person} from "./person";
 import {PersonService} from "./person.service";
 import { Component } from '@angular/core';
 import {OnInit} from "@angular/core";
-import {DataTableModule,SharedModule} from 'primeng/primeng';
 
 @Component({
-    selector: 'stm-city-list-prime',
+    selector: 'person-list-prime',
     template: `
     <div>
     Prime
-        <p-dataTable [value]="cityList">
+        <p-dataTable [value]="personList">
             <p-column field="id" header="ID"></p-column>
-            <p-column field="name" header="Adı"></p-column>
-            <p-column field="latitude" header="Enlem"></p-column>
-            <p-column field="longitude" header="Boylam"></p-column>
+            <p-column field="ad" header="Adı"></p-column>
+            <p-column field="soyad" header="Enlem"></p-column>
+            <p-column field="yas" header="Boylam"></p-column>
         </p-dataTable>
     </div>
     `,
     providers: [PersonService]
 })
 
-export class STMCityListComponentPrime implements OnInit {
+export class PersonListComponentPrime implements OnInit {
   
    ngOnInit(): void {
         this.getPersonList();
@@ -30,7 +29,7 @@ export class STMCityListComponentPrime implements OnInit {
     personList: Person[];
 
     getPersonList(): void {
-        this.personService.getCityList().then(personList=>this.personList = personList);
+        this.personService.getPersonList().then(personList=>this.personList = personList);
     }
 
     constructor(private personService: PersonService) {
