@@ -5,7 +5,8 @@
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
     "tsc": "tsc",
-    "tsc:w": "tsc -w"
+    "tsc:w": "tsc -w",
+    "test": "tsc && concurrently \"tsc -w\" \"karma start karma.conf.js\" "
   },
   "licenses": [
     {
@@ -33,8 +34,16 @@
   },
   "devDependencies": {
     "@types/core-js": "^0.9.34",
+    "@types/jasmine": "^2.5.36",
     "@types/node": "^6.0.45",
     "concurrently": "^3.0.0",
+    "jasmine": "^2.5.2",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-htmlfile-reporter": "^0.3.4",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
     "lite-server": "^2.2.2",
     "typescript": "^2.0.3"
   }
