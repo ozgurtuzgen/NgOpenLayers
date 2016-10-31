@@ -4,13 +4,14 @@ import { Component } from '@angular/core';
   selector: 'my-app',
   template: `
        <nav>
-         <a routerLink="basic" routerLinkActive="active">Basic</a>
-         <a routerLink="city"  routerLinkActive="active">Cities With Map</a>
+         <a routerLink="basic" routerLinkActive="active"><h1>Basic</h1></a>
+         <a routerLink="city"  routerLinkActive="active"><h1>Cities With Map</h1></a>
+         <a routerLink="ui-deneme"  routerLinkActive="active"><h1>UI Library Denemeleri</h1></a>
        </nav>
        <h1>{{title}}</h1>
       <router-outlet></router-outlet>
   `,
 })
 export class AppComponent {
-  title = 'App';
+  title = 'Root Module, modulden modüle değişmeyen kısımlar. Ana layout gibi.';
 }
