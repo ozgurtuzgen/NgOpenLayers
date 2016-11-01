@@ -21,6 +21,7 @@ export class STMMapComponent implements OnInit {
     map:ol.Map;
 
     ngOnInit():void{
+        
         this.map = new ol.Map({
             target: 'map',
             layers: [
