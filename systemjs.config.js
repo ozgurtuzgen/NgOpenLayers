@@ -26,11 +26,15 @@
             // other libraries
             'rxjs':                      'npm:rxjs',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
+            'primeng':                   'npm:primeng',
+            '@progress/kendo-angular-grid': 'npm:@progress/kendo-angular-grid',
+            '@progress/kendo-angular-intl': 'npm:@progress/kendo-angular-intl',
+            '@telerik/kendo-intl': 'npm:@telerik/kendo-intl',
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
             app: {
-                main: './modules/main.js',
+                main: './main.js',
                 defaultExtension: 'js'
             },
             rxjs: {
@@ -39,7 +43,20 @@
             'angular-in-memory-web-api': {
                 main: './index.js',
                 defaultExtension: 'js'
-            }
+            },
+            'primeng':    { defaultExtension: 'js' },
+            'npm:@progress/kendo-angular-grid': {
+                 main: './dist/npm/js/main.js',
+                 defaultExtension: 'js'
+            },
+            'npm:@progress/kendo-angular-intl': {
+                 main: './dist/npm/js/main.js',
+                 defaultExtension: 'js'
+            },
+            'npm:@telerik/kendo-intl': {
+                 main: './dist/npm/js/main.js',
+                 defaultExtension: 'js'
+            },
         }
     });
 })(this);
