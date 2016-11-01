@@ -9,11 +9,11 @@ import {OnInit} from "@angular/core";
     <div>
     Prime
         <input #gb type="text" placeholder="Global search">
-        <p-dataTable [value]="personList" [sortMode]="multiple" [globalFilter]="gb"  selectionMode="single" [(selection)]="selectedPerson" [responsive]="true">
+        <p-dataTable [value]="personList" [globalFilter]="gb"  selectionMode="single" [(selection)]="selectedPerson" [responsive]="true">
             <p-column field="id" header="id"  sortable="true" [filter]="true"></p-column>
             <p-column field="ad" header="Ad" sortable="true" [filter]="true"></p-column>
-            <p-column field="soyad" header="Soyad" sortable="true" [filter]="true"></p-column>
-            <p-column field="yas" header="Yaş" sortable="true" [filter]="true"></p-column>
+            <p-column field="soyad" header="Soyad" sortable="true"></p-column>
+            <p-column field="yas" header="Yaş" sortable="true"></p-column>
         </p-dataTable>
         <div *ngIf = "selectedPerson">
             {{selectedPerson.ad}} {{selectedPerson.soyad}} {{selectedPerson.yas}}
