@@ -19,7 +19,7 @@ export class STMAppComponent implements OnInit,AfterViewInit{
 
 //@Input(STMMapComponent) private mapComp:STMMapComponent;
 
-    @ViewChild(STMMapComponent) private mapObj:STMMapComponent;
+    @ViewChild("stmmap1") private mapObj:STMMapComponent;
 
     ngAfterViewInit():void{
         //alert(this.mapObj);
