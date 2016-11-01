@@ -18,10 +18,10 @@ export class STMMapComponent implements OnInit {
         }));
     }
 
-    map:any;
-    //ol: any;
+    map:ol.Map;
 
     ngOnInit():void{
+        
         this.map = new ol.Map({
             target: 'map',
             layers: [
