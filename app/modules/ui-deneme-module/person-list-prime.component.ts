@@ -34,7 +34,7 @@ export class PersonListComponentPrime implements OnInit {
     selectedPerson : Person;
 
     getPersonList(): void {
-        this.personService.getPersonList().then(personList=>this.personList = personList);
+        this.personService.getPersonListPrime().then(personList=>this.personList = personList);
     }
 
     constructor(private personService: PersonService) {
