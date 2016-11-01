@@ -1,27 +1,34 @@
-import {City} from "./city";
-import{CityService} from "./city.service";
-import {OnInit} from "@angular/core";
-import {Component,EventEmitter,Output} from "@angular/core";
+import { City } from "./city";
+import { CityService } from "./city.service";
+import { OnInit } from "@angular/core";
+import { Component, EventEmitter, Output } from "@angular/core";
 
 @Component({
-    selector:"stm-city-list",
-        template:`
+    selector: "stm-city-list",
+    template: `
 <table>
-<tr><td>
-<h2>İller</h2>
-</td></tr><tr><td>
-<ul>
-<li *ngFor="let city of cityList" (click)="onSelect(city)">
-<span >{{city.id}}</span>{{city.name}}
-</li>
-</ul>
-</td></tr>
+    <tr>
+        <td>
+            <h2>{{title}}</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul class="illerClass">
+                <li class="ilClass" *ngFor="let city of cityList" (click)="onSelect(city)">
+                    <span >{{city.id}}</span>{{city.name}}
+                </li>
+            </ul>
+        </td>
+    </tr>
 </table>
 `,
     providers: [CityService]
 })
 
 export class STMCityListComponent implements OnInit {
+
+    title = "İller";
 
     @Output() onSelectedCityChanged = new EventEmitter<City>();
 
@@ -39,7 +46,7 @@ export class STMCityListComponent implements OnInit {
     cityList: City[];
 
     getCityList(): void {
-        this.cityService.getCityList().then(cityList=>this.cityList = cityList);
+        this.cityService.getCityList().then(cityList => this.cityList = cityList);
     }
 
     constructor(private cityService: CityService) {
