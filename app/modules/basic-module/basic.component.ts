@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   `,
 })
 export class BasicComponent {
-  title = 'Basic NgModule';
+  title = 'Basic Module, Root Module ile birlikte yüklenen ilk modul. Şimdilik buraya birşey eklemedik.';
 }
