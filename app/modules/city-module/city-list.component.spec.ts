@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 
 import { STMCityListComponent } from './city-list.component';
@@ -67,9 +67,9 @@ describe('City list component', () => {
 
     it('no title in the DOM until manually call `detectChanges`', () => {
         expect(elTitle.textContent).toEqual('');
-    });   
+    });
 
-    it('should not show city list before OnInit', () => {        
+    it('should not show city list before OnInit', () => {
         expect(spy.calls.any()).toBe(false, 'getQuote not yet called');
     });
 
@@ -87,4 +87,22 @@ describe('City list component', () => {
             expect(elCityList.children.length).toBe(3);
         });
     }));
+
+    it('should show city list after getCityList promise (fakeAsync)', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();                  // wait for async getCityList
+        fixture.detectChanges(); // update view with vity list
+        expect(elCityList.children.length).toBe(3);
+    }));
+
+    it('should show quote after getCityList promise (done)', done => {
+        fixture.detectChanges();
+
+        // get the spy promise and wait for it to resolve
+        spy.calls.mostRecent().returnValue.then(() => {
+        fixture.detectChanges(); // update view with quote
+        expect(elCityList.children.length).toBe(3);
+        done();
+        });
+    });
 });
