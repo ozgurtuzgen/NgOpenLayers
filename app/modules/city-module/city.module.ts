@@ -4,11 +4,12 @@ import { STMMapComponent }   from './stm-map.component';
 import {STMCityListComponent} from "./city-list.component";
 import {STMAppComponent} from "./city.component";
 import {CityRoutingModule} from "./city-routing.module";
-import {STMLayerList} from "./stm-layerlist.component"
+import {STMLayerList} from "./stm-layerlist.component";
+import {STMMapStatusBar} from "./stm-mapstatusbar.component";
 
 @NgModule({
     imports:      [ CommonModule, CityRoutingModule ],
-    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList ],
+    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar ],
     bootstrap:    [ STMAppComponent]
 })
 

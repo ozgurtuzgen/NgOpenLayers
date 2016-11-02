@@ -2,6 +2,7 @@ import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/cor
 import { City } from "./city"
 import { STMMapComponent } from "./stm-map.component";
 import { STMLayerList } from "./stm-layerlist.component";
+import {STMMapStatusBar} from "./stm-mapstatusbar.component";
 
 @Component({
     selector: "stm-app",
@@ -11,6 +12,7 @@ import { STMLayerList } from "./stm-layerlist.component";
 </td>
 <td>
     <stm-map id="ozgur" #stmmap1>Loading...</stm-map>
+    <stm-mapstatusbar #mapstatusbar1></stm-mapstatusbar>
     </td><td align="top" style="vertical-align: top">
    <stm-layer-list #stmlayerlist1 ></stm-layer-list>
     
@@ -20,26 +22,16 @@ import { STMLayerList } from "./stm-layerlist.component";
 
 export class STMAppComponent implements OnInit, AfterViewInit {
 
-    //@Input(STMMapComponent) private mapComp:STMMapComponent;
-
     @ViewChild("stmmap1") private mapObj: STMMapComponent;
     @ViewChild("stmlayerlist1") private stmLayerList: STMLayerList;
+    @ViewChild("mapstatusbar1") private stmMapStatusBar: STMMapStatusBar;
 
     ngAfterViewInit(): void {
-
         this.stmLayerList.layerlist = this.mapObj.layers;
-
-        //alert(this.mapObj);
-        //        console.log(this.mapObj[0].zoomtoExtent);
-
-        //  console.log(this.mapComp.zoomtoExtent);
+        this.stmMapStatusBar.setMap(this.mapObj.map);
     }
 
     ngOnInit(): void {
-
-
-        //  var mapC=document.getElementById("ozgur");
-        //  alert(mapC);
     }
 
     onCityChanged(city: City, stmmap: STMMapComponent) {
