@@ -1,7 +1,5 @@
 import { Component,OnInit,Input,Output } from '@angular/core';
-import {} from "./stm-layer"
 import {STMLayer} from "./stm-layer";
-
 
 @Component({
     selector: 'stm-layer-list',
