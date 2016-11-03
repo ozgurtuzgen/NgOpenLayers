@@ -15,7 +15,8 @@ import { UserService } from './user.service';
 })
 export class RestConsumeComponent implements OnInit {
    title = 'Rest consume deneme';
-
+   errorMessage: string;
+   
    users: User[];
 
    selectedUser : User;
@@ -23,9 +24,10 @@ export class RestConsumeComponent implements OnInit {
   constructor(private userService: UserService) { }
 
     getUsers(): void {
-           this.userService
-              .getUsers()
-              .then(users => this.users = users);
+         this.userService.getUsers()
+               .subscribe(
+                   users => this.users = users,
+                    error =>  this.errorMessage = <any>error);
    }
 
    ngOnInit() : void {
