@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import {STMMapComponent} from "./../stm-map.component";
 import {ProjectItem} from "./ProjectItem";
-
+import {FormsModule} from "@angular/forms";
 
 @Component({
     selector:"stm-map-toolbar-create-project",
     template:`
 <table><tr><td>
 <input type="button" value="Create Project" (click)="createProject()">
-<input type="text" [(ngModel)]="projectItem1.name" />
+
 
 </td></tr></table>
 
@@ -17,9 +17,10 @@ import {ProjectItem} from "./ProjectItem";
                 <div id="popup-content">
                 <table><tr><td>
                 AD
+                <input type="text" [(ngModel)]="projectItem1.name" />
 </td>
 <td>
-<input type="text" />
+<input type="text" [(ngModel)]="projectItem1.name"/>
 </td>
 
 </tr></table>
