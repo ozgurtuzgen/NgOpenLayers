@@ -6,10 +6,13 @@ import {STMAppComponent} from "./city.component";
 import {CityRoutingModule} from "./city-routing.module";
 import {STMLayerList} from "./stm-layerlist.component";
 import {STMMapStatusBar} from "./stm-mapstatusbar.component";
+import {STMMapToolbar} from "./MapToolbar/map-toolbar.component";
+import {STMMapToolbarCreateProject} from "./MapToolbar/map-toolbar-create-project.component";
+
 
 @NgModule({
     imports:      [ CommonModule, CityRoutingModule ],
-    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar ],
+    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject ],
     bootstrap:    [ STMAppComponent]
 })
 

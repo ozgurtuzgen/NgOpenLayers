@@ -14,9 +14,10 @@ import {STMLayer} from "./stm-layer";
 <li *ngFor="let layer of layerlist">
 <span>
 <table><tr><td>
-   <input type="checkbox"  checked (click)="toggleVisibility(layer)">
+   <input type="checkbox" checked (click)="toggleVisibility(layer)" >
 </td>
 {{layer.name}}
+
 </tr></table>
 </span>
 </li>
