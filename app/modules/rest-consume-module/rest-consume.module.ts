@@ -9,16 +9,18 @@ import { HttpModule }    from '@angular/http';
 
 // Imports for loading & configuring the in-memory web api
 
-//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-//import { InMemoryDataService }  from './in-memory-data.service';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data.service';
 
 import {UserService} from './user.service';
 
+import {DataTableModule,SharedModule} from 'primeng/primeng';
+
 
 @NgModule({
-    imports:      [ BrowserModule, RestConsumeRoutingModule, HttpModule],
+    imports:      [ BrowserModule, RestConsumeRoutingModule, HttpModule, InMemoryWebApiModule.forRoot(InMemoryDataService), DataTableModule, SharedModule],
     declarations: [ RestConsumeComponent ],
-    providers: [ UserService ],
+    providers:    [ UserService ],
     bootstrap:    [ RestConsumeComponent]
 })
 

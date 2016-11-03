@@ -10,10 +10,11 @@ export class UserService {
                                 'Access-Control-Allow-Methods': 'GET',
                                 'Access-Control-Allow-Origin': '*'});
 
- private usersUrl = 'http://localhost/WebApiApp1/api/person';  // URL to web api
+ private urlInMemory = 'app/users';
+ private urlWeb = 'http://localhost/WebApiApp1/api/person/';  // URL to web api
 
 getUsers(): Promise<User[]> {
-    return this.http.get(this.usersUrl)
+    return this.http.get(this.urlInMemory)
                .toPromise()
                .then(response => response.json().data as User[])
                .catch(this.handleError);

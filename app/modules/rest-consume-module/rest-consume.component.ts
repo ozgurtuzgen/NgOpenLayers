@@ -5,23 +5,20 @@ import { UserService } from './user.service';
 @Component({
   moduleId: module.id,
   selector: 'rest-consume',
- /* template: `
+  template: `
        <h1>{{title}}</h1>
-     <ul>
-      <li *ngFor="let user of users"
-        <span>{{user.id}}</span> {{user.name}}
-      </li>
-    </ul>
-  `,*/
-   providers: [UserService],
-   template: `
-       <h1>{{title}}</h1>
+        <p-dataTable [value]="users" selectionMode="single" [(selection)]="selectedPerson" [responsive]="true">
+            <p-column field="id" header="id"  sortable="true"></p-column>
+            <p-column field="name" header="Ad" sortable="true"></p-column>
+        </p-dataTable>
        `
 })
 export class RestConsumeComponent implements OnInit {
-  title = 'Rest consume deneme';
+   title = 'Rest consume deneme';
 
    users: User[];
+
+   selectedUser : User;
 
   constructor(private userService: UserService) { }
 
@@ -33,6 +30,5 @@ export class RestConsumeComponent implements OnInit {
 
    ngOnInit() : void {
       this.getUsers();
-      console.log(this.users);
   }
 }
