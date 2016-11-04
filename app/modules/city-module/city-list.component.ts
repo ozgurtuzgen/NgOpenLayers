@@ -5,24 +5,7 @@ import { Component, EventEmitter, Output } from "@angular/core";
 
 @Component({
     selector: "stm-city-list",
-    template: `
-<table>
-    <tr>
-        <td>
-            <h2>{{title}}</h2>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <ul class="illerClass">
-                <li class="ilClass" *ngFor="let city of cityList" (click)="onSelect(city)">
-                    <span >{{city.id}}</span>{{city.name}}
-                </li>
-            </ul>
-        </td>
-    </tr>
-</table>
-`,
+    templateUrl: 'app/modules/city-module/city-list.component.html',
     providers: [CityService]
 })
 
