@@ -8,7 +8,7 @@ import {STMLayer} from "./stm-layer";
     template: `
 <table><tr><td>
 
-  <div id="map" style="width:600px;height:400px" class="map"></div>
+  <div id="map" style="width:800px;height:600px" class="map"></div>
 
 </td>
 

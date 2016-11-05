@@ -5,7 +5,7 @@ import {STMMapComponent} from "../stm-map.component";
 @Component({
     selector:"stm-map-toolbar",
     template:`
-<table><tr><td>
+<table  style="height:26px;border:solid 1px #777777"><tr><td>
 <stm-map-toolbar-create-project #toolItemCreateProject1></stm-map-toolbar-create-project>
 
 </td></tr></table>
