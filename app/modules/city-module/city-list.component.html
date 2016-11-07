@@ -1,0 +1,16 @@
+<table>
+    <tr>
+        <td>
+            <h2>{{title}}</h2>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul class="illerClass">
+                <li *ngFor="let city of cityList" (click)="onSelect(city)">
+                    <span >{{city.id}}</span>{{city.name}}
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
