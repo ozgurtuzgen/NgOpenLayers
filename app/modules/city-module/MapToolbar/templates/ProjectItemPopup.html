@@ -1,0 +1,28 @@
+<table>
+    <tr>
+        <td>
+            <img src="./app/img/placemark.png?temp=2" style="width:22px;height:22px" alt="Yeni yer imi" id="imgNewPlacemark">
+        </td>
+    </tr>
+</table>
+
+<div id="popup" class="ol-popup" style="width:250px;">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" [(ngModel)]="projectItem1.name" class="form-control" id="name">
+            </div>
+        <div class="form-group">
+            <label for="lat">Enlem</label>
+            <input type="text" [(ngModel)]="projectItem1.lat" class="form-control" id="lat">
+        </div>
+        <div class="form-group">
+            <label for="lon">Enlem</label>
+            <input type="text" [(ngModel)]="projectItem1.lon" class="form-control" id="lon">
+        </div>
+        <div>
+            <input type="button" id="btnSave" value="Kaydet" >
+        </div>
+    </div>
+</div>

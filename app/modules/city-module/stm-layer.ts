@@ -1,8 +1,8 @@
-export class STMLayer{
-    name:string;
-    layer:ol.layer.Layer;
+export class STMLayer {
 
-    constructor()
-    {
+    name: string;
+    layer: ol.layer.Layer;
+
+    constructor() {
     }
 }
