@@ -1,7 +1,10 @@
 <table>
     <tr>
         <td>
-            <img src="./app/img/placemark.png?temp=2" style="width:22px;height:22px" alt="Yeni yer imi" id="imgNewPlacemark">
+            <button type="button" (click)="newPlaceMarkClicked()" pButton>
+                <img src="./app/img/placemark.png" width="20px" height="20px">
+            </button>
+
         </td>
     </tr>
 </table>
@@ -18,11 +21,11 @@
             <input type="text" [(ngModel)]="projectItem1.lat" class="form-control" id="lat">
         </div>
         <div class="form-group">
-            <label for="lon">Enlem</label>
+            <label for="lon">Boylam</label>
             <input type="text" [(ngModel)]="projectItem1.lon" class="form-control" id="lon">
         </div>
         <div>
-            <input type="button" id="btnSave" value="Kaydet" >
+            <button pButton type="text" (click)="btnSaveClicked()" >Kaydet</button>
         </div>
     </div>
 </div>

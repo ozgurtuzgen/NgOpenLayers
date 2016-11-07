@@ -14,7 +14,6 @@ export class STMMapToolbarCreateProject implements AfterViewInit {
     content: any;
     closer: any;
     btnSave: any;
-    imgNewPlacemark: any;
 
     projectItem1 = new ProjectItem("deneme proj name", 0, 0);
     isActive: boolean;
@@ -29,30 +28,30 @@ export class STMMapToolbarCreateProject implements AfterViewInit {
         this.content = document.getElementById('popup-content');
         this.closer = document.getElementById('popup-closer');
         this.btnSave = document.getElementById('btnSave');
-        this.imgNewPlacemark = document.getElementById('imgNewPlacemark');
         var self = this;
-        this.imgNewPlacemark.onclick = function (evt) {
-            self.isActive = !self.isActive;
-            if (!self.isActive) {
-                self.map.unByKey(self.clickListenerKey);
-            }
-            else {
-                self.clickListenerKey = self.map.on('click', function (evt) {
-                    var coordinate = evt.coordinate;
-
-                    var wgs84 = ol.proj.transform(
-                        coordinate, 'EPSG:3857', 'EPSG:4326');
-                    var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
-                        coordinate, 'EPSG:3857', 'EPSG:4326'));
-                    self.projectItem1 = new ProjectItem("", wgs84[0], wgs84[1]);
-                    var content = document.getElementById("popup-content");
-                    self.overlay.setPosition(coordinate);
-                }.bind(self));
-            }
-
-        }.bind(self)
     }
 
+    newPlaceMarkClicked(){
+        var self=this;
+
+        this.isActive = !this.isActive;
+        if (!this.isActive) {
+            this.map.unByKey(this.clickListenerKey);
+        }
+        else {
+            this.clickListenerKey = this.map.on('click', function (evt) {
+                var coordinate = evt.coordinate;
+
+                var wgs84 = ol.proj.transform(
+                    coordinate, 'EPSG:3857', 'EPSG:4326');
+                var hdms = ol.coordinate.toStringHDMS(ol.proj.transform(
+                    coordinate, 'EPSG:3857', 'EPSG:4326'));
+                this.projectItem1 = new ProjectItem("", wgs84[0], wgs84[1]);
+                var content = document.getElementById("popup-content");
+                self.overlay.setPosition(coordinate);
+            }.bind(self));
+        }
+    }
 
     constructor() {
         this.projectItemList = [];
@@ -87,25 +86,25 @@ export class STMMapToolbarCreateProject implements AfterViewInit {
         })
     }
 
+    btnSaveClicked(){
+        var coord3857 = ol.proj.transform(
+            [this.projectItem1.lat, this.projectItem1.lon], 'EPSG:4326', 'EPSG:3857');
+
+        var feature = new ol.Feature({
+            geometry: new ol.geom.Point(coord3857),
+            name: this.projectItem1.name
+        });
+
+        this.source.addFeature(feature);
+        this.overlay.setPosition(undefined);
+    }
+
     prepare() {
         var self = this;
 
         this.closer.onclick = function (evt) {
             self.overlay.setPosition(undefined);
             return false;
-        }.bind(self);
-
-        this.btnSave.onclick = function (evt) {
-            var coord3857 = ol.proj.transform(
-                [self.projectItem1.lat, self.projectItem1.lon], 'EPSG:4326', 'EPSG:3857');
-
-            var feature = new ol.Feature({
-                geometry: new ol.geom.Point(coord3857),
-                name: self.projectItem1.name
-            });
-
-            self.source.addFeature(feature);
-            self.overlay.setPosition(undefined);
         }.bind(self);
 
         this.source = new ol.source.Vector();
