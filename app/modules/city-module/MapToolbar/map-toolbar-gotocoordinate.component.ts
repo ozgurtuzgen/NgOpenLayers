@@ -8,37 +8,41 @@ import {ProjectItem} from "./ProjectItem";
 })
 
 
-export class STMMapToolbarGoToCoordinate  {
+export class STMMapToolbarGoToCoordinate {
 
     popup: HTMLElement;
     stmmap: STMMapComponent;
     display: boolean = false;
 
-    lat:Number=33;
-    lon:Number=41;
-    cs:Number=4326;
+    lat: Number = 33;
+    lon: Number = 41;
+    cs: Number = 4326;
 
-    showDialog()
-    {
-        this.display=true;
+    showDialog() {
+        this.display = true;
     }
 
-    closeDialog()
-    {
-        this.display=false;
+    closeDialog() {
+        this.display = false;
     }
 
-    gotoCoord()
-    {
-        var coord=[new Number(this.lat), new Number(this.lon)];
+    gotoCoord() {
+        var coord: number[];
+        var nLat=Number(this.lon);
+        var nLon=Number(this.lat);
 
-        if(this.cs==3857) {
+
+        coord=[nLat,nLon];
+
+        // coord=  [Number(this.lat), Number(this.lon)];
+
+        if (this.cs == 3857) {
             coord = ol.proj.transform(
-                coord, 'EPSG:3857', 'EPSG:4326');
+                [nLat,nLon], 'EPSG:3857', 'EPSG:4326');
         }
 
-        var view =new ol.View({
-            center: ol.proj.fromLonLat(coord),
+        var view = new ol.View({
+            center: ol.proj.fromLonLat([coord[0],coord[1]]),
             zoom: 8
         });
 
