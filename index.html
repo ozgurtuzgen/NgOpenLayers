@@ -15,7 +15,32 @@
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="http://openlayers.org/en/v3.19.1/build/ol.js"></script>
+
+    <script type="text/javascript" src="node_modules/ol3-cesium/dist/ol3cesium-debug.js"></script>
+    <script type="text/javascript" src="node_modules/ol3-cesium/dist/Cesium/Cesium.js"></script>
+    <script type="text/javascript" >
+
+        var ol3d;
+        var scene;
+        var terrainProvider;
+        function create3d(olmap) {
+            ol3d = new olcs.OLCesium({map: olmap});
+            scene = ol3d.getCesiumScene();
+            terrainProvider = new Cesium.CesiumTerrainProvider({
+                url: '//assets.agi.com/stk-terrain/world'
+            });
+            scene.terrainProvider = terrainProvider;
+        }
+
+        function toggle3d()
+        {
+            ol3d.setEnabled(!ol3d.getEnabled());
+        }
+
+    </script>
+
+
+
     <!-- 2. Configure SystemJS -->
     <script src="systemjs.config.js"></script>
     <script>

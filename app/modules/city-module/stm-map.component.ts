@@ -1,7 +1,6 @@
-import { Component,OnInit,Output } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {City} from "./city";
 import {STMLayer} from "./stm-layer";
-
 
 @Component({
     selector: 'stm-map',
@@ -12,15 +11,10 @@ import {STMLayer} from "./stm-layer";
 
 </td>
 
-<td>
-
-
-
-</td>
 </tr></table>
-  
     `
 })
+
 export class STMMapComponent implements OnInit {
 
     map: ol.Map;
@@ -83,11 +77,9 @@ export class STMMapComponent implements OnInit {
 
         this.layers = [];
 
-
         var layer = new ol.layer.Tile({
             source: new ol.source.OSM()
         });
-
 
         this.map = new ol.Map({
             target: 'map',
@@ -98,11 +90,17 @@ export class STMMapComponent implements OnInit {
             })
         });
 
+        var glayer = new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: '  http://mt3.google.com/vt/lyrs=y&z={z}&x={x}&y={y}'
+            })
+        })
+
+        this.addLayer("Google Layer", glayer);
         this.addLayer("Openstreet map", layer);
         this.addVector();
     }
 
     constructor() {
-
     }
 }

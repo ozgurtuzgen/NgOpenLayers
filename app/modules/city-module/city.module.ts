@@ -11,10 +11,11 @@ import {STMMapToolbarCreateProject} from "./MapToolbar/map-toolbar-create-projec
 import {STMMapToolbarGoToCoordinate} from "./MapToolbar/map-toolbar-gotocoordinate.component"
 import {FormsModule} from '@angular/forms';
 import {DialogModule} from 'primeng/primeng';
+import {STMMapToolbarShow3d} from './MapToolbar/map-toolbar-show3d.component'
 
 @NgModule({
     imports:      [ CommonModule, CityRoutingModule,FormsModule,DialogModule ],
-    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,STMMapToolbarGoToCoordinate ],
+    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,STMMapToolbarGoToCoordinate,STMMapToolbarShow3d ],
     bootstrap:    [ STMAppComponent]
 })
 
