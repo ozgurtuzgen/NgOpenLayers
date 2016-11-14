@@ -3,6 +3,7 @@ import {STMMapToolbarCreateProject} from "./map-toolbar-create-project.component
 import {STMMapComponent} from "../stm-map.component";
 import {STMMapToolbarGoToCoordinate} from "./map-toolbar-gotocoordinate.component";
 import {STMMapToolbarShow3d} from "./map-toolbar-show3d.component";
+import {STMMapToolbarAddShapefile} from "./map-toolbar-add-shapefile.component";
 
 
 @Component({
@@ -18,6 +19,9 @@ import {STMMapToolbarShow3d} from "./map-toolbar-show3d.component";
 <td >
 <stm-map-toolbar-show3d #toolItemShow3d> </stm-map-toolbar-show3d>
 </td>
+<td>
+<stm-map-toolbar-addshapefile #toolItemAddShapefile></stm-map-toolbar-addshapefile>
+</td>
 </tr></table>
 `,
 })
@@ -27,6 +31,9 @@ export class STMMapToolbar {
     @ViewChild("toolItemCreateProject1") private itemCreateProject: STMMapToolbarCreateProject;
     @ViewChild("toolItemGoToCoord") private itemGoToCoord: STMMapToolbarGoToCoordinate;
     @ViewChild("toolItemShow3d") private itemShow3d: STMMapToolbarShow3d;
+    @ViewChild("toolItemAddShapefile") private itemAddShapefile: STMMapToolbarAddShapefile;
+
+
 
     map: STMMapComponent;
 
@@ -35,5 +42,6 @@ export class STMMapToolbar {
         this.itemCreateProject.setMap(stmMap);
         this.itemGoToCoord.setMap(stmMap);
         this.itemShow3d.setMap(stmMap);
+        this.itemAddShapefile.setMap(stmMap);
     }
 }
