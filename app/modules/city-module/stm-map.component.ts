@@ -21,7 +21,7 @@ export class STMMapComponent implements OnInit {
     layers: STMLayer[];
 
     addVector() {
-        var geojsonObject = {
+    /*    var geojsonObject = {
             'type': 'FeatureCollection',
             'crs': {
                 'type': 'name',
@@ -42,14 +42,39 @@ export class STMMapComponent implements OnInit {
                     'coordinates': [[3797383, 4709299], [3352116, 4862418]]
                 }
             }]
+        };*/
+
+        var geojsonObject = {
+            'type': 'FeatureCollection',
+            'crs': {
+                'type': 'name',
+                'properties': {
+                    'name': 'EPSG:4326'
+                }
+            },
+            'features': [{
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [33, 39]
+                }
+            }, {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [[35, 36], [36, 37]]
+                }
+            }]
         };
+
 
         var vectorSource = new ol.source.Vector({
             features: (new ol.format.GeoJSON()).readFeatures(geojsonObject)
         });
 
         var vectorLayer = new ol.layer.Vector({
-            source: vectorSource
+            source: vectorSource,
+
         });
 
         this.addLayer("Vector-GeoJson Layer", vectorLayer);

@@ -1,14 +1,14 @@
 <html>
 <head>
-     <script>document.write('<base href="' + document.location + '" />');</script>
+    <script>document.write('<base href="' + document.location + '" />');</script>
     <title>Angular QuickStart</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/themes/omega/theme.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/primeng/components/datatable/datatable.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/primeng.min.css" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/@telerik/kendo-theme-default/dist/all.css" />
+    <link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/themes/omega/theme.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/primeng/components/datatable/datatable.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/primeng.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/node_modules/@telerik/kendo-theme-default/dist/all.css"/>
     <!-- 1. Load libraries -->
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -27,10 +27,12 @@
     <script src="app/lib/preview.js"></script>
 
 
-
     <script type="text/javascript" src="node_modules/ol3-cesium/dist/ol3cesium-debug.js"></script>
     <script type="text/javascript" src="node_modules/ol3-cesium/dist/Cesium/Cesium.js"></script>
-    <script type="text/javascript" >
+    <script type="text/javascript">
+
+        var shapefileName='';
+        var addShapeTool = null;
 
         var ol3d;
         var scene;
@@ -44,42 +46,43 @@
             scene.terrainProvider = terrainProvider;
         }
 
-        function toggle3d()
-        {
+        function toggle3d() {
             ol3d.setEnabled(!ol3d.getEnabled());
         }
 
     </script>
 
 
-
     <!-- 2. Configure SystemJS -->
     <script src="systemjs.config.js"></script>
     <script>
-        System.import('app').catch(function(err){ console.error(err); });
+        System.import('app').catch(function (err) {
+            console.error(err);
+        });
     </script>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
 </head>
 <style type="text/css">
-    .dialog
-    {
+    .dialog {
         border-radius: 10px;
-        font-size:11px;
+        font-size: 11px;
         font-family: Tahoma;
     }
+
     .ol-popup {
         position: absolute;
         background-color: white;
-        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+        filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
         padding: 15px;
         border-radius: 10px;
         border: 1px solid #cccccc;
         bottom: 12px;
         left: -50px;
-        font-size:11px;
+        font-size: 11px;
         font-family: Tahoma;
     }
+
     .ol-popup:after, .ol-popup:before {
         top: 100%;
         border: solid transparent;
@@ -89,24 +92,28 @@
         position: absolute;
         pointer-events: none;
     }
+
     .ol-popup:after {
         border-top-color: white;
         border-width: 10px;
         left: 48px;
         margin-left: -10px;
     }
+
     .ol-popup:before {
         border-top-color: #cccccc;
         border-width: 11px;
         left: 48px;
         margin-left: -11px;
     }
+
     .ol-popup-closer {
         text-decoration: none;
         position: absolute;
         top: 2px;
         right: 8px;
     }
+
     .ol-popup-closer:after {
         content: "✖";
     }
@@ -115,12 +122,18 @@
 
 <!-- 3. Display the application -->
 <body style="vertical-align: top;">
-<table><tr><td style="vertical-align: top;" align="top">
-<my-app></my-app>
-    </td></tr>
-    <tr><td>
+<table>
+    <tr>
+        <td style="vertical-align: top;" align="top">
+            <my-app></my-app>
+        </td>
+    </tr>
+    <tr>
+        <td>
 
 
-</td></tr></table>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

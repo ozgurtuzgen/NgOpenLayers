@@ -28,27 +28,23 @@ export class STMMapToolbarGoToCoordinate {
 
     gotoCoord() {
         var coord: number[];
-        var nLat=Number(this.lon);
-        var nLon=Number(this.lat);
+        var nLat = Number(this.lon);
+        var nLon = Number(this.lat);
 
-
-        coord=[nLat,nLon];
-
+        coord = [nLat, nLon];
         // coord=  [Number(this.lat), Number(this.lon)];
-
         if (this.cs == 3857) {
             coord = ol.proj.transform(
-                [nLat,nLon], 'EPSG:3857', 'EPSG:4326');
+                [nLat, nLon], 'EPSG:3857', 'EPSG:4326');
         }
 
         var view = new ol.View({
-            center: ol.proj.fromLonLat([coord[0],coord[1]]),
+            center: ol.proj.fromLonLat([coord[0], coord[1]]),
             zoom: 8
         });
 
         this.stmmap.map.setView(view);
     }
-
 
     setMap(stmMap: STMMapComponent) {
         this.stmmap = stmMap;

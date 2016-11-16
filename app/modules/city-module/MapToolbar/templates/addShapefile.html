@@ -1,9 +1,51 @@
 <table>
     <tr>
         <td>
-            <button type="button" (click)="addShapefile()" pButton>
+            <button type="button" (click)="showDialog()" pButton>
                 <img src="./app/img/shp.png" width="20px" height="20px">
             </button>
         </td>
     </tr>
 </table>
+
+
+<p-dialog [resizable]="false" header="Shapefile Ekle" class="dialog" showEffect="fade" [(visible)]="display">
+    <header>
+        <div>
+            <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+
+        </div>
+    </header>
+
+    <div>
+
+        <div class="form-group">
+            <input type="file" id="inputFile" accept="application/zip">
+
+        </div>
+
+        <div class="form-group">
+            <label for="slctCS">Koordinat Sistemi</label>
+            <select [(ngModel)]="cs" class="form-control" id="slctCS">
+                <option value="4326">4326</option>
+                <option value="3857">3857</option>
+            </select>
+        </div>
+
+        <table style="width:100%; font-family: tahoma;font-size:11px">
+            <tr>
+                <td>
+                    <button pButton type="text" (click)="loadShapefile()">Tamam</button>
+                </td>
+                <td>
+                    <button pButton type="text" (click)="closeDialog()" icon="fa-close">Kapat</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <footer>
+
+
+    </footer>
+</p-dialog>
