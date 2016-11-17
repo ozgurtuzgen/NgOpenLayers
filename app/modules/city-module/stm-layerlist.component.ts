@@ -1,25 +1,33 @@
 import {Component, OnInit, Input, Output} from '@angular/core';
 import {STMLayer} from "./stm-layer";
+import {STMMapComponent} from "./stm-map.component";
 
 @Component({
     selector: 'stm-layer-list',
     template: `
 <table>
 <tr><td>
+
+
+
 <p-dataList [value]="layerlist">
   <header>
        Katmanlar
     </header>
   <template let-layer>
- 
-  <table style="padding:2px;font-size:13px" ><tr>
-  <td style="padding:2px">
+ <div sytle="padding:4px">
+  <table style="font-size:14px" ><tr>
+  <td>
   <img style="width: 12px;height:12px"  [ngStyle]="{'visibility': getVisibility(layer.isUserDefined)}"  src="app/img/delete.png" (click)="deleteLayer(layer)">
+</td>
+<td>
+  <img style="width: 12px;height:12px"  src="app/img/four-arrows.png" (click)="zoomToLayer(layer)">
+
 </td>
   <td style="padding:2px">
    <input type="checkbox" checked (click)="toggleVisibility(layer)" >
 </td>
-<td style="padding-right:6px">
+<td style="padding-right:4px">
 
 {{layer.name}}
 
@@ -27,9 +35,11 @@ import {STMLayer} from "./stm-layer";
 
 
 </tr></table>
+</div>
   </template>
   
   </p-dataList>
+
 
   </table>
     `
@@ -37,12 +47,25 @@ import {STMLayer} from "./stm-layer";
 
 export class STMLayerList implements OnInit {
 
+    stmMap: STMMapComponent;
     layerlist: STMLayer[];
 
     toggleVisibility(layer: STMLayer) {
         var visible = layer.layer.getVisible();
         visible = !visible;
         layer.layer.setVisible(visible);
+    }
+
+    zoomToLayer(layer: STMLayer) {
+        var src = layer.layer.getSource() as ol.source.Vector;
+        if(src) {
+            var extent = src.getExtent();
+            extent = ol.proj.transformExtent(extent, 'EPSG:3857', 'EPSG:4326');
+
+            if(extent) {
+                this.stmMap.map.setView(new ol.View(extent));
+            }
+        }
     }
 
     ngOnInit(): void {
@@ -65,5 +88,9 @@ export class STMLayerList implements OnInit {
         if (!isVisible)
             result = "hidden";
         return result;
+    }
+
+    setMap(stmMap: STMMapComponent) {
+        this.stmMap = stmMap;
     }
 }

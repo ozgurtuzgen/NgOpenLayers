@@ -10,12 +10,12 @@ import {STMMapToolbar} from "./MapToolbar/map-toolbar.component";
 import {STMMapToolbarCreateProject} from "./MapToolbar/map-toolbar-create-project.component";
 import {STMMapToolbarGoToCoordinate} from "./MapToolbar/map-toolbar-gotocoordinate.component"
 import {FormsModule} from '@angular/forms';
-import {DialogModule,DataListModule} from 'primeng/primeng';
+import {DialogModule,DataListModule,OrderListModule} from 'primeng/primeng';
 import {STMMapToolbarShow3d} from './MapToolbar/map-toolbar-show3d.component';
 import {STMMapToolbarAddShapefile} from './MapToolbar/map-toolbar-add-shapefile.component';
 
 @NgModule({
-    imports:      [ CommonModule, CityRoutingModule,FormsModule,DialogModule,DataListModule ],
+    imports:      [ CommonModule, CityRoutingModule,FormsModule,DialogModule,DataListModule,OrderListModule ],
     declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile],
     bootstrap:    [ STMAppComponent]
 })
