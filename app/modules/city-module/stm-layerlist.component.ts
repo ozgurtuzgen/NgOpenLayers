@@ -6,24 +6,32 @@ import {STMLayer} from "./stm-layer";
     template: `
 <table>
 <tr><td>
-
-</td></tr>
-
-<h4>Katmanlar</h4>
-<ul>
-<li *ngFor="let layer of layerlist">
-<span>
-<table><tr><td>
+<p-dataList [value]="layerlist">
+  <header>
+       Katmanlar
+    </header>
+  <template let-layer>
+ 
+  <table style="padding:2px" ><tr>
+  <td style="padding:2px">
+  <img style="width: 12px;height:12px"  src="app/img/delete.png" (click)="deleteLayer(layer)">
+</td>
+  <td style="padding:2px">
    <input type="checkbox" checked (click)="toggleVisibility(layer)" >
 </td>
+<td style="padding-right:6px">
+
 {{layer.name}}
 
-</tr></table>
-</span>
-</li>
-</ul>
-  </table>
+</td>
 
+
+</tr></table>
+  </template>
+  
+  </p-dataList>
+
+  </table>
     `
 })
 
@@ -45,4 +53,10 @@ export class STMLayerList implements OnInit {
         this.layerlist = [];
     }
 
+    deleteLayer(layer:STMLayer) {
+        if(layer.isUserDefined) {
+            var index = this.layerlist.indexOf(layer);
+            this.layerlist.splice(index, 1);
+        }
+    }
 }

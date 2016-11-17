@@ -89,11 +89,12 @@ export class STMMapComponent implements OnInit {
         }));
     }
 
-    addLayer(name: string, layer: ol.layer.Layer) {
+    addLayer(name: string, layer: ol.layer.Layer,isUserDefined:boolean=false) {
 
         var stmLayer = new STMLayer();
         stmLayer.name = name;
         stmLayer.layer = layer;
+        stmLayer.isUserDefined=isUserDefined;
         this.layers.push(stmLayer);
         this.map.addLayer(layer);
     }

@@ -71,8 +71,7 @@ export class STMMapToolbarAddShapefile implements OnInit {
 
         var extent = vectorLayer.getSource().getExtent();
 
-        addShapeTool.stmmap.addLayer(shapefileName, vectorLayer);
-
+        addShapeTool.stmmap.addLayer(shapefileName, vectorLayer,true);
     }
 
     addShapefile() {
