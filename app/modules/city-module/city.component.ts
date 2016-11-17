@@ -1,33 +1,43 @@
-import { Component, Input, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { City } from "./city"
-import { STMMapComponent } from "./stm-map.component";
-import { STMLayerList } from "./stm-layerlist.component";
+import {Component, Input, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {City} from "./city"
+import {STMMapComponent} from "./stm-map.component";
+import {STMLayerList} from "./stm-layerlist.component";
 import {STMMapStatusBar} from "./stm-mapstatusbar.component";
 import {STMMapToolbar} from "./MapToolbar/map-toolbar.component";
 
 @Component({
     selector: "stm-app",
     template: `
-<table><tr><td style="vertical-align:top">
+<table>
+<tr>
+<td style="vertical-align:top">
   <stm-city-list   (onSelectedCityChanged)="onCityChanged($event,stmmap1)"> loading</stm-city-list>
 </td>
 <td>
-<table><tr><td>
 
+<table>
+<tr>
+<td>
 <stm-map-toolbar #mapToolbar1></stm-map-toolbar>
-</td></tr>
+</td>
+<td>&nbsp;</td>
+</tr>
 <tr><td>
     <stm-map id="ozgur" #stmmap1>Loading...</stm-map>
 
-</td></tr>
+</td>
+<td style="vertical-align: top;padding-left: 4px">
+   <stm-layer-list #stmlayerlist1 ></stm-layer-list>
+
+</td>
+
+</tr>
 <tr><td>
     <stm-mapstatusbar #mapstatusbar1></stm-mapstatusbar>
 </td></tr>
 
 </table>
 
-    </td><td align="top" style="vertical-align: top">
-   <stm-layer-list #stmlayerlist1 ></stm-layer-list>
     
 </td></tr></table>
 `

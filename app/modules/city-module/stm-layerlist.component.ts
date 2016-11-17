@@ -1,4 +1,4 @@
-import { Component,OnInit,Input,Output } from '@angular/core';
+import {Component, OnInit, Input, Output} from '@angular/core';
 import {STMLayer} from "./stm-layer";
 
 @Component({
@@ -12,9 +12,9 @@ import {STMLayer} from "./stm-layer";
     </header>
   <template let-layer>
  
-  <table style="padding:2px" ><tr>
+  <table style="padding:2px;font-size:13px" ><tr>
   <td style="padding:2px">
-  <img style="width: 12px;height:12px"  src="app/img/delete.png" (click)="deleteLayer(layer)">
+  <img style="width: 12px;height:12px"  [ngStyle]="{'visibility': getVisibility(layer.isUserDefined)}"  src="app/img/delete.png" (click)="deleteLayer(layer)">
 </td>
   <td style="padding:2px">
    <input type="checkbox" checked (click)="toggleVisibility(layer)" >
@@ -53,10 +53,17 @@ export class STMLayerList implements OnInit {
         this.layerlist = [];
     }
 
-    deleteLayer(layer:STMLayer) {
-        if(layer.isUserDefined) {
+    deleteLayer(layer: STMLayer) {
+        if (layer.isUserDefined) {
             var index = this.layerlist.indexOf(layer);
             this.layerlist.splice(index, 1);
         }
+    }
+
+    getVisibility(isVisible: boolean) {
+        var result = "visible";
+        if (!isVisible)
+            result = "hidden";
+        return result;
     }
 }
