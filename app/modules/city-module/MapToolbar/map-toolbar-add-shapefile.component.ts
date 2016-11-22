@@ -4,7 +4,7 @@ import forEach = require("core-js/fn/array/for-each");
 
 declare var loadshp: Function;
 declare var addShapeTool: STMMapToolbarAddShapefile;
-declare var shapefileName:string;
+declare var shapefileName: string;
 
 @Component({
     selector: "stm-map-toolbar-addshapefile",
@@ -19,7 +19,7 @@ export class STMMapToolbarAddShapefile implements OnInit {
     loaded: boolean;
     inputFile: HTMLInputElement;
     url: any;
-    layerName:string;
+    layerName: string;
     cs: Number = 4326;
 
     ngOnInit(): void {
@@ -71,7 +71,7 @@ export class STMMapToolbarAddShapefile implements OnInit {
 
         var extent = vectorLayer.getSource().getExtent();
 
-        addShapeTool.stmmap.addLayer(shapefileName, vectorLayer,true);
+        addShapeTool.stmmap.addLayer(shapefileName, vectorLayer, true);
     }
 
     addShapefile() {
@@ -90,7 +90,7 @@ export class STMMapToolbarAddShapefile implements OnInit {
     loadShapefile() {
         var files = this.inputFile.files;
         this.url = files[0];
-        shapefileName=files[0].name;
+        shapefileName = files[0].name;
         this.addShapefile();
     }
 

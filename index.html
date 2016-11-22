@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="/node_modules/primeng/components/datatable/datatable.css"/>
     <link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/primeng.min.css"/>
     <link rel="stylesheet" type="text/css" href="/node_modules/@telerik/kendo-theme-default/dist/all.css"/>
+    <link rel="stylesheet" href="https://openlayers.org/en/v3.19.1/css/ol.css" type="text/css">
+
     <!-- 1. Load libraries -->
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -31,9 +33,9 @@
     <script type="text/javascript" src="node_modules/ol3-cesium/dist/Cesium/Cesium.js"></script>
     <script type="text/javascript">
 
-        var shapefileName='';
+        var shapefileName = '';
         var addShapeTool = null;
-
+        var toolMeasureDistance = null;
         var ol3d;
         var scene;
         var terrainProvider;
@@ -60,6 +62,7 @@
             console.error(err);
         });
     </script>
+
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
 </head>
 <style type="text/css">
@@ -119,7 +122,39 @@
     }
 </style>
 
-
+<style>
+    .tooltip {
+        position: relative;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+        color: white;
+        padding: 4px 8px;
+        opacity: 0.7;
+        white-space: nowrap;
+    }
+    .tooltip-measure {
+        opacity: 1;
+        font-weight: bold;
+    }
+    .tooltip-static {
+        background-color: #ffcc33;
+        color: black;
+        border: 1px solid white;
+    }
+    .tooltip-measure:before,
+    .tooltip-static:before {
+        border-top: 6px solid rgba(0, 0, 0, 0.5);
+        border-right: 6px solid transparent;
+        border-left: 6px solid transparent;
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        margin-left: -7px;
+        left: 50%;
+    }
+    .tooltip-static:before {
+        border-top-color: #ffcc33;
+    }    </style>
 <!-- 3. Display the application -->
 <body style="vertical-align: top;font-family:Tahoma">
 <table>

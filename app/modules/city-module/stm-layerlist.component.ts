@@ -60,10 +60,14 @@ export class STMLayerList implements OnInit {
         var src = layer.layer.getSource() as ol.source.Vector;
         if(src) {
             var extent = src.getExtent();
-            extent = ol.proj.transformExtent(extent, 'EPSG:3857', 'EPSG:4326');
+         //   extent = ol.proj.transformExtent(extent, 'EPSG:3857', 'EPSG:4326');
 
-            if(extent) {
-                this.stmMap.map.setView(new ol.View(extent));
+            if (extent) // minLon != null && minLat != null && maxLon != null && maxLat != null){
+            {
+             /*   var bottomLeft = ol.proj.transform([minLon, minLat], 'EPSG:4326', 'EPSG:3857');
+                var topRight = ol.proj.transform([maxLon, maxLat], 'EPSG:4326', 'EPSG:3857');
+                extent = new ol.extent.boundingExtent([bottomLeft,topRight]);*/
+                this.stmMap.map.getView().fit(extent, this.stmMap.map.getSize());
             }
         }
     }

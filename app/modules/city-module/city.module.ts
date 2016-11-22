@@ -13,10 +13,12 @@ import {FormsModule} from '@angular/forms';
 import {DialogModule,DataListModule,OrderListModule} from 'primeng/primeng';
 import {STMMapToolbarShow3d} from './MapToolbar/map-toolbar-show3d.component';
 import {STMMapToolbarAddShapefile} from './MapToolbar/map-toolbar-add-shapefile.component';
+import {STMMapToolbarMeasureDistance} from './MapToolbar/map-toolbar-measure-distance.component';
+
 
 @NgModule({
     imports:      [ CommonModule, CityRoutingModule,FormsModule,DialogModule,DataListModule,OrderListModule ],
-    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile],
+    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance],
     bootstrap:    [ STMAppComponent]
 })
 

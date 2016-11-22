@@ -99,6 +99,20 @@ export class STMMapComponent implements OnInit {
         this.map.addLayer(layer);
     }
 
+
+    removeLayer(layer: ol.layer.Layer) {
+
+        this.map.removeLayer(layer);
+       for(var i=0;i<this.layers.length;i++)
+       {
+           if(this.layers[i].layer==layer)
+           {
+               this.layers.splice(i,1);
+               break;
+           }
+       }
+    }
+
     ngOnInit(): void {
 
         this.layers = [];
