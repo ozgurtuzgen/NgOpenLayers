@@ -14,11 +14,14 @@ import {DialogModule,DataListModule,OrderListModule} from 'primeng/primeng';
 import {STMMapToolbarShow3d} from './MapToolbar/map-toolbar-show3d.component';
 import {STMMapToolbarAddShapefile} from './MapToolbar/map-toolbar-add-shapefile.component';
 import {STMMapToolbarMeasureDistance} from './MapToolbar/map-toolbar-measure-distance.component';
+import {STMMapToolbarSaveMap} from "./MapToolbar/map-toolbar-save-map.component";
+import {STMMapToolbarAddGeojson} from "./MapToolbar/map-toolbar-add-geojson.component";
 
 
 @NgModule({
     imports:      [ CommonModule, CityRoutingModule,FormsModule,DialogModule,DataListModule,OrderListModule ],
-    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance],
+    declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,
+        STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance,STMMapToolbarSaveMap,STMMapToolbarAddGeojson],
     bootstrap:    [ STMAppComponent]
 })
 

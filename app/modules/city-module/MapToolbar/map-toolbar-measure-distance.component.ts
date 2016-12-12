@@ -22,16 +22,17 @@ export class STMMapToolbarMeasureDistance {
     helpTooltip: ol.Overlay; // Overlay to show the help messages.
     measureTooltipElement: Element; // The measure tooltip element
     measureTooltip: ol.Overlay; //Overlay to show the measurement
-    continuePolygonMsg = 'Click to continue drawing the polygon'; //  Message to show when the user is drawing a polygon.
-    continueLineMsg = 'Click to continue drawing the line'; //Message to show when the user is drawing a line.
-    helpMsg = 'Click to start drawing';
+    continuePolygonMsg = 'Çizimi bitirmek için double click yapınız'; //  Click to continue drawing the polygon-Message to show when the user is drawing a polygon.
+    continueLineMsg = 'Çizimi bitirmek için double click yapınız'; //Click to continue drawing the line - Message to show when the user is drawing a line.
+    helpMsg = 'Çizime başlamak için tıklayınız';
     isGeodesic: Boolean = true;
     draw: any; // global so we can remove it later
     type = 'LineString';// or 'Polygon'
     activated: Boolean = false;
-    overlayList:Array;
+    overlayList:Array<ol.Overlay>;
 
     tooltip="Mesafe Ölç";
+    areaTooltip="Alan Ölç";
 
     setMap(stmMap: STMMapComponent) {
         this.stmmap = stmMap;
@@ -239,8 +240,8 @@ export class STMMapToolbarMeasureDistance {
             positioning: 'center-left'
         });
 
-        toolMeasureDistance.overlayList.push(toolMeasureDistance.helpTooltip);
-        toolMeasureDistance.stmmap.map.addOverlay(toolMeasureDistance.helpTooltip);
+       // toolMeasureDistance.overlayList.push(toolMeasureDistance.helpTooltip);
+      //  toolMeasureDistance.stmmap.map.addOverlay(toolMeasureDistance.helpTooltip);
     }
 
     /**
@@ -262,6 +263,8 @@ export class STMMapToolbarMeasureDistance {
 
     }
 
+    pointerMoveListenerKey:any;
+
     eventRegistered:Boolean=false;
     activate() {
         toolMeasureDistance.stmmap.addLayer("Ölçüm katmanı", this.vector, false);
@@ -269,7 +272,7 @@ export class STMMapToolbarMeasureDistance {
 
         // toolMeasureDistance.stmmap.map.removeInteraction(toolMeasureDistance.draw);
         if (!toolMeasureDistance.eventRegistered) {
-            toolMeasureDistance.stmmap.map.on('pointermove', toolMeasureDistance.pointerMoveHandler);
+          toolMeasureDistance.pointerMoveListenerKey=  toolMeasureDistance.stmmap.map.on('pointermove', toolMeasureDistance.pointerMoveHandler);
             toolMeasureDistance.stmmap.map.getViewport().addEventListener('mouseout', function () {
                 toolMeasureDistance.helpTooltipElement.classList.add('hidden');
             });
@@ -279,7 +282,6 @@ export class STMMapToolbarMeasureDistance {
     }
 
     deactivate() {
-
         toolMeasureDistance.stmmap.removeLayer(this.vector);
 
         this.vector.getSource().clear();
@@ -290,11 +292,11 @@ export class STMMapToolbarMeasureDistance {
         }
         this.overlayList=new Array();
 
+        this.stmmap.map.unByKey(toolMeasureDistance.pointerMoveListenerKey);
     }
 
-
     buttonClicked() {
-        if (toolMeasureDistance.activated) {
+        if (toolMeasureDistance.activated ) {
             toolMeasureDistance.deactivate();
         }
         else {
@@ -302,5 +304,24 @@ export class STMMapToolbarMeasureDistance {
         }
 
         toolMeasureDistance.activated = !toolMeasureDistance.activated;
+    }
+
+
+    distanceButtonClicked() {
+        if (this.type != 'LineString' && this.activated)
+        {
+           this.buttonClicked();
+        }
+
+        this.type = 'LineString';
+        this.buttonClicked();
+    }
+
+    areaButtonClicked() {
+        if (this.type != 'Polygon' && this.activated)
+            this.buttonClicked();
+
+        this.type = 'Polygon';
+        this.buttonClicked();
     }
 }

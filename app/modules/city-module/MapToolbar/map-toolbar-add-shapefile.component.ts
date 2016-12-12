@@ -13,10 +13,9 @@ declare var shapefileName: string;
 
 export class STMMapToolbarAddShapefile implements OnInit {
 
-    is3dLoaded: boolean = false;
     stmmap: STMMapComponent;
     display: boolean = false;
-    loaded: boolean;
+    loaded: boolean = false;
     inputFile: HTMLInputElement;
     url: any;
     layerName: string;
@@ -40,6 +39,8 @@ export class STMMapToolbarAddShapefile implements OnInit {
                 this.lazyLoadScript(s);
             }
         }
+
+        this.loaded = true;
     }
 
     lazyLoadScript(src: string) {
@@ -53,8 +54,31 @@ export class STMMapToolbarAddShapefile implements OnInit {
 
         var features = (new ol.format.GeoJSON()).readFeatures(data, {
             dataProjection: "EPSG:4326",
-            featureProjection: "EPSG:3857"
+                featureProjection: "EPSG:3857"
         });
+
+        var isFeatureValid=true;
+        for (var f = 0; f < features.length; f++) {
+            isFeatureValid=true;
+            var g = features[f].getGeometry() as ol.geom.Polygon;
+            var coordList = g.getCoordinates();
+            for (var i = 0; i < coordList.length; i++) {
+                for (var k = 0; k < coordList[i].length; k++) {
+                    var hole = coordList[i][k];
+                    if (isNaN(hole[0]) || isNaN(hole[1])) {
+                      features.splice(f,1);
+                        f--;
+                        break;
+                    }
+                }
+                if(!isFeatureValid)
+                {
+                    break;
+                }
+            }
+        }
+
+        //  features = [features[0], features[1]];
 
         var format = new ol.format.GeoJSON();
 

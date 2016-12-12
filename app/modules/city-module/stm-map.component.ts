@@ -136,7 +136,8 @@ export class STMMapComponent implements OnInit {
             })
         })
 
-        this.addLayer("Google Layer", glayer);
+     //
+        //   this.addLayer("Google Layer", glayer);
         this.addLayer("Openstreet map", layer);
         this.addVector();
     }

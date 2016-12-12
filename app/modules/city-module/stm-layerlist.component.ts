@@ -85,6 +85,8 @@ export class STMLayerList implements OnInit {
             var index = this.layerlist.indexOf(layer);
             this.layerlist.splice(index, 1);
         }
+
+        this.stmMap.map.removeLayer(layer.layer);
     }
 
     getVisibility(isVisible: boolean) {
