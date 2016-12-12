@@ -1,7 +1,6 @@
-import { Component,OnInit,Output } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {City} from "./city";
 import {STMLayer} from "./stm-layer";
-
 
 @Component({
     selector: 'stm-map',
@@ -12,22 +11,17 @@ import {STMLayer} from "./stm-layer";
 
 </td>
 
-<td>
-
-
-
-</td>
 </tr></table>
-  
     `
 })
+
 export class STMMapComponent implements OnInit {
 
     map: ol.Map;
     layers: STMLayer[];
 
     addVector() {
-        var geojsonObject = {
+    /*    var geojsonObject = {
             'type': 'FeatureCollection',
             'crs': {
                 'type': 'name',
@@ -48,14 +42,39 @@ export class STMMapComponent implements OnInit {
                     'coordinates': [[3797383, 4709299], [3352116, 4862418]]
                 }
             }]
+        };*/
+
+        var geojsonObject = {
+            'type': 'FeatureCollection',
+            'crs': {
+                'type': 'name',
+                'properties': {
+                    'name': 'EPSG:4326'
+                }
+            },
+            'features': [{
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [33, 39]
+                }
+            }, {
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [[35, 36], [36, 37]]
+                }
+            }]
         };
+
 
         var vectorSource = new ol.source.Vector({
             features: (new ol.format.GeoJSON()).readFeatures(geojsonObject)
         });
 
         var vectorLayer = new ol.layer.Vector({
-            source: vectorSource
+            source: vectorSource,
+
         });
 
         this.addLayer("Vector-GeoJson Layer", vectorLayer);
@@ -70,24 +89,37 @@ export class STMMapComponent implements OnInit {
         }));
     }
 
-    addLayer(name: string, layer: ol.layer.Layer) {
+    addLayer(name: string, layer: ol.layer.Layer,isUserDefined:boolean=false) {
 
         var stmLayer = new STMLayer();
         stmLayer.name = name;
         stmLayer.layer = layer;
+        stmLayer.isUserDefined=isUserDefined;
         this.layers.push(stmLayer);
         this.map.addLayer(layer);
+    }
+
+
+    removeLayer(layer: ol.layer.Layer) {
+
+        this.map.removeLayer(layer);
+       for(var i=0;i<this.layers.length;i++)
+       {
+           if(this.layers[i].layer==layer)
+           {
+               this.layers.splice(i,1);
+               break;
+           }
+       }
     }
 
     ngOnInit(): void {
 
         this.layers = [];
 
-
         var layer = new ol.layer.Tile({
             source: new ol.source.OSM()
         });
-
 
         this.map = new ol.Map({
             target: 'map',
@@ -98,11 +130,18 @@ export class STMMapComponent implements OnInit {
             })
         });
 
+        var glayer = new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: '  http://mt3.google.com/vt/lyrs=y&z={z}&x={x}&y={y}'
+            })
+        })
+
+     //
+        //   this.addLayer("Google Layer", glayer);
         this.addLayer("Openstreet map", layer);
         this.addVector();
     }
 
     constructor() {
-
     }
 }
