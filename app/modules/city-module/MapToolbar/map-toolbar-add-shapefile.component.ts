@@ -64,11 +64,14 @@ export class STMMapToolbarAddShapefile implements OnInit {
             var coordList = g.getCoordinates();
             for (var i = 0; i < coordList.length; i++) {
                 for (var k = 0; k < coordList[i].length; k++) {
+
                     var hole = coordList[i][k];
-                    if (isNaN(hole[0]) || isNaN(hole[1])) {
-                      features.splice(f,1);
-                        f--;
-                        break;
+                    if(g.getType()=="Point") {
+                        if (isNaN(hole[0]) || isNaN(hole[1])) {
+                            features.splice(f, 1);
+                            f--;
+                            break;
+                        }
                     }
                 }
                 if(!isFeatureValid)

@@ -1,17 +1,16 @@
 import {Component, OnInit, Output} from '@angular/core';
 import {City} from "./city";
 import {STMLayer} from "./stm-layer";
+import {MapToolbarFactory} from "./MapToolbar/MapToolbarFactory"
 
 @Component({
     selector: 'stm-map',
     template: `
-<table><tr><td>
 
-  <div id="map" style="width:800px;height:600px" class="map"></div>
+  <div id="map" style="width:100%;height:100%" class="map"></div>
 
-</td>
+  
 
-</tr></table>
     `
 })
 
@@ -21,28 +20,28 @@ export class STMMapComponent implements OnInit {
     layers: STMLayer[];
 
     addVector() {
-    /*    var geojsonObject = {
-            'type': 'FeatureCollection',
-            'crs': {
-                'type': 'name',
-                'properties': {
-                    'name': 'EPSG:3857'
-                }
-            },
-            'features': [{
-                'type': 'Feature',
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [3642187, 4842049]
-                }
-            }, {
-                'type': 'Feature',
-                'geometry': {
-                    'type': 'LineString',
-                    'coordinates': [[3797383, 4709299], [3352116, 4862418]]
-                }
-            }]
-        };*/
+        /*    var geojsonObject = {
+         'type': 'FeatureCollection',
+         'crs': {
+         'type': 'name',
+         'properties': {
+         'name': 'EPSG:3857'
+         }
+         },
+         'features': [{
+         'type': 'Feature',
+         'geometry': {
+         'type': 'Point',
+         'coordinates': [3642187, 4842049]
+         }
+         }, {
+         'type': 'Feature',
+         'geometry': {
+         'type': 'LineString',
+         'coordinates': [[3797383, 4709299], [3352116, 4862418]]
+         }
+         }]
+         };*/
 
         var geojsonObject = {
             'type': 'FeatureCollection',
@@ -89,12 +88,12 @@ export class STMMapComponent implements OnInit {
         }));
     }
 
-    addLayer(name: string, layer: ol.layer.Layer,isUserDefined:boolean=false) {
+    addLayer(name: string, layer: ol.layer.Layer, isUserDefined: boolean = false) {
 
         var stmLayer = new STMLayer();
         stmLayer.name = name;
         stmLayer.layer = layer;
-        stmLayer.isUserDefined=isUserDefined;
+        stmLayer.isUserDefined = isUserDefined;
         this.layers.push(stmLayer);
         this.map.addLayer(layer);
     }
@@ -103,17 +102,16 @@ export class STMMapComponent implements OnInit {
     removeLayer(layer: ol.layer.Layer) {
 
         this.map.removeLayer(layer);
-       for(var i=0;i<this.layers.length;i++)
-       {
-           if(this.layers[i].layer==layer)
-           {
-               this.layers.splice(i,1);
-               break;
-           }
-       }
+        for (var i = 0; i < this.layers.length; i++) {
+            if (this.layers[i].layer == layer) {
+                this.layers.splice(i, 1);
+                break;
+            }
+        }
     }
 
     ngOnInit(): void {
+
 
         this.layers = [];
 
@@ -124,6 +122,7 @@ export class STMMapComponent implements OnInit {
         this.map = new ol.Map({
             target: 'map',
             layers: [],
+            controls: ol.control.defaults({attribution: false, zoom: false}),
             view: new ol.View({
                 center: ol.proj.fromLonLat([39, 33]),
                 zoom: 4
@@ -136,10 +135,13 @@ export class STMMapComponent implements OnInit {
             })
         })
 
-     //
+        //
         //   this.addLayer("Google Layer", glayer);
         this.addLayer("Openstreet map", layer);
         this.addVector();
+
+        var toolbarFactory=new MapToolbarFactory();
+      //  toolbarFactory.initializeToolbar(this.map);
     }
 
     constructor() {

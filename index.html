@@ -52,7 +52,7 @@
             ol3d.setEnabled(!ol3d.getEnabled());
         }
 
-        var addGeojsonTool=null;
+        var addGeojsonTool = null;
 
     </script>
 
@@ -64,8 +64,11 @@
             console.error(err);
         });
     </script>
+    <title>Devlet Su İşleri MEYTAP</title>
 
     <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+
 </head>
 <style type="text/css">
     .dialog {
@@ -122,6 +125,39 @@
     .ol-popup-closer:after {
         content: "✖";
     }
+
+    .btn-flat {
+        border-radius: 0;
+        border-width: 1px;
+        -webkit-box-shadow: none !important;
+        -moz-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+
+    .map-toolbar-container #coordinate-info-input {
+        background-color: #fff;
+        text-align: center;
+        font-size: 10px;
+        line-height: 18px;
+        height: 28px;
+        width: 130px;
+    }
+
+    .map-toolbar-container #zoom-level-text {
+        background-color: #fff;
+        text-align: center;
+        font-size: 10px;
+        line-height: 18px;
+        height: 28px;
+        width: 40px;
+        padding: 6px;
+    }
+
+    input[type=text], select {
+        border-radius: 0!important;
+        box-shadow: none!important;
+    }
+
 </style>
 
 <style>
@@ -134,15 +170,18 @@
         opacity: 0.7;
         white-space: nowrap;
     }
+
     .tooltip-measure {
         opacity: 1;
         font-weight: bold;
     }
+
     .tooltip-static {
         background-color: #ffcc33;
         color: black;
         border: 1px solid white;
     }
+
     .tooltip-measure:before,
     .tooltip-static:before {
         border-top: 6px solid rgba(0, 0, 0, 0.5);
@@ -154,23 +193,36 @@
         margin-left: -7px;
         left: 50%;
     }
+
     .tooltip-static:before {
         border-top-color: #ffcc33;
     }    </style>
 <!-- 3. Display the application -->
-<body style="vertical-align: top;font-family:Tahoma">
-<table>
+<body style="font-family:Verdana">
+
+<table style="width:100%;height:100%;margin:0px;padding:0px">
     <tr>
-        <td style="vertical-align: top;" align="top">
-            <my-app></my-app>
+        <td colspan="2"
+            style="padding:12px; background-color:#055975;height:46px;color:white;color:white;font-size:14px;">
+
+            Devlet Su İşleri <br/>
+            Mekansal Yatırım Takip Programı
+
         </td>
     </tr>
     <tr>
         <td>
-
-
+            <table style="width:100%;height:100%">
+                <tr>
+                    <td>
+                        <my-app></my-app>
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>
+
+
 </body>
 </html>

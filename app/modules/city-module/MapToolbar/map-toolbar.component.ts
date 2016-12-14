@@ -11,7 +11,7 @@ import {STMMapToolbarAddGeojson} from "./map-toolbar-add-geojson.component";
 @Component({
     selector: "stm-map-toolbar",
     template: `
-<table  style="height:26px"><tr><td>
+<table  style="height:26px;position:absolute;top:72px;left:14px;z-index: 11111"><tr><td>
 <stm-map-toolbar-create-project #toolItemCreateProject1></stm-map-toolbar-create-project>
 
 </td>
