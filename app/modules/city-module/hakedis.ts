@@ -20,6 +20,8 @@ export class Hakedis
         this.stmMap.addLayer("Hakedişler", vector);
     }
 
+
+
     getStyle(feature, resolution) {
         return new ol.style.Style({
             fill: new ol.style.Fill({
@@ -42,24 +44,29 @@ export class Hakedis
         })
     }
 
+    clearLayer()
+    {
+        this.source.clear();
+    }
+
     addHakedis(geom:ol.geom.LineString,dist1:number,dist2:number)
     {
         var lineLength=geom.getLength();
         var fraction1=dist1/lineLength;
         var fraction2=dist2/lineLength;
-        var start=geom.getCoordinateAt(fraction1);
-        var end=geom.getCoordinateAt(fraction2);
+        var startIndex=-1;
+        var endIndex=-1;
+        var index_param={value:0};
+        var start=geom.getCoordinateAt2(fraction1,index_param);
+        startIndex=index_param.value;
 
-
-
-        var startIndex=this.getCoordinateAtDist(geom,dist1);
-        var endIndex=this.getCoordinateAtDist(geom,dist2);
-
+        var end=geom.getCoordinateAt2(fraction2,index_param);
+        endIndex=index_param.value;
 
         var coords=geom.getCoordinates();
         var newCoords= coords.slice(startIndex,endIndex);
-        newCoords.push(end);
-        newCoords.splice(0,0,start);
+     //   newCoords.push(end);
+     //   newCoords.splice(0,0,start);
 
         var line=new ol.geom.LineString(newCoords);
 

@@ -3949,6 +3949,8 @@ declare module ol {
              */
             getCoordinateAt(fraction: number, opt_dest?: ol.Coordinate): ol.Coordinate;
 
+            getCoordinateAt2(fraction: number, index_param?: any): ol.Coordinate;
+
             /**
              * Return the length of the linestring on projected plane.
              * @return {number} Length (on projected plane).
@@ -5723,6 +5725,8 @@ declare module ol {
              * @api stable
              */
             setMap(map: ol.Map): void;
+
+            setHitTolerance(hitTolerance:number):void;
 
         }
 

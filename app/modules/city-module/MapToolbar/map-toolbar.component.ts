@@ -33,7 +33,9 @@ import {STMMapToolbarAddGeojson} from "./map-toolbar-add-geojson.component";
 <td>
 <stm-map-toolbar-savemap #toolItemSaveMap></stm-map-toolbar-savemap>
 </td>
-
+<td>
+<button value="Hakedişleri Sil" (click)="deleteHakedis()" title="Hakedişleri sil">Hakedişleri sil</button>
+</td>
 
 </tr></table>
 `,
@@ -62,5 +64,10 @@ export class STMMapToolbar {
         this.itemAddGeojson.setMap(stmMap);
         this.itemMeasureDistance.setMap(stmMap);
         this.itemSaveMap.setMap(stmMap);
+    }
+
+    deleteHakedis()
+    {
+        this.map.hakedisLayer.clearLayer();
     }
 }

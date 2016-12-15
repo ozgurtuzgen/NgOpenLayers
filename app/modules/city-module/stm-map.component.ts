@@ -185,7 +185,7 @@ export class STMMapComponent implements OnInit {
             multi: true
         });
 
-        //selectClick.setHitTolerance(5);
+        selectClick.setHitTolerance(5);
 
         this.map.addInteraction(selectClick);
         selectClick.on('select', function (e) {
@@ -197,7 +197,7 @@ export class STMMapComponent implements OnInit {
                 var geom = feature.getGeometry();
                 var line = geom as  ol.geom.LineString;
                 var lineLength = line.getLength();
-                var coord1 = line.getCoordinateAt(0.5);
+
                 context.hakedisLayer.addHakedis(line, lineLength / 5, lineLength * 2 / 5);
             }
 
