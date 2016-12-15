@@ -5,7 +5,7 @@ import {STMMapComponent} from "./stm-map.component";
 @Component({
     selector: 'stm-layer-list',
     template: `
-<table>
+<table >
 <tr><td>
 
 

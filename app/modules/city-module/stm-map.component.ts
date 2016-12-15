@@ -1,7 +1,9 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, OnInit, Output, ViewChild} from '@angular/core';
 import {City} from "./city";
 import {STMLayer} from "./stm-layer";
 import {MapToolbarFactory} from "./MapToolbar/MapToolbarFactory"
+import {Dialog} from "primeng/components/dialog/dialog";
+import {Hakedis} from "./hakedis";
 
 @Component({
     selector: 'stm-map',
@@ -11,13 +13,39 @@ import {MapToolbarFactory} from "./MapToolbar/MapToolbarFactory"
 
   
 
+<p-dialog #pd [resizable]="false" header="Bilgi" class="dialog" showEffect="fade" [(visible)]="display">
+    <header>
+        <div>
+      BİLGİ 
+ <ul>
+                <li *ngFor="let n of keys" >
+                    <span >{{n}}</span>
+                </li>
+            </ul>
+            
+        </div>
+    </header>
+
+    <footer>
+
+    </footer>
+</p-dialog>
+
+
     `
 })
 
 export class STMMapComponent implements OnInit {
 
+    hakedisLayer: Hakedis;
+    keys: string[];
+
+    @ViewChild("pd") private pd: Dialog;
+    display: boolean = false;
+
     map: ol.Map;
     layers: STMLayer[];
+
 
     addVector() {
         /*    var geojsonObject = {
@@ -73,7 +101,6 @@ export class STMMapComponent implements OnInit {
 
         var vectorLayer = new ol.layer.Vector({
             source: vectorSource,
-
         });
 
         this.addLayer("Vector-GeoJson Layer", vectorLayer);
@@ -140,10 +167,87 @@ export class STMMapComponent implements OnInit {
         this.addLayer("Openstreet map", layer);
         this.addVector();
 
-        var toolbarFactory=new MapToolbarFactory();
-      //  toolbarFactory.initializeToolbar(this.map);
+        var toolbarFactory = new MapToolbarFactory();
+        //  toolbarFactory.initializeToolbar(this.map);
+
+        var context = this;
+        this.map.on('click', function (evt) {
+
+            //context.displayFeatureInfo(evt.pixel);
+        }.bind(context));
+
+
+        this.hakedisLayer = new Hakedis();
+        this.hakedisLayer.initialize(this);
+
+        var selectClick = new ol.interaction.Select({
+            condition: ol.events.condition.click,
+            multi: true
+        });
+
+        //selectClick.setHitTolerance(5);
+
+        this.map.addInteraction(selectClick);
+        selectClick.on('select', function (e) {
+            var coll = e.target.getFeatures();
+            var length = coll.getLength();
+            if (length > 0) {
+                var features = coll.getArray();
+                var feature = features[0];
+                var geom = feature.getGeometry();
+                var line = geom as  ol.geom.LineString;
+                var lineLength = line.getLength();
+                var coord1 = line.getCoordinateAt(0.5);
+                context.hakedisLayer.addHakedis(line, lineLength / 5, lineLength * 2 / 5);
+            }
+
+            /* document.getElementById('status').innerHTML = '&nbsp;' +
+             e.target.getFeatures().getLength() +
+             ' selected features (last operation selected ' + e.selected.length +
+             ' and deselected ' + e.deselected.length + ' features)';*/
+        }.bind(context));
     }
 
+    displayFeatureInfo = function (pixel: ol.Pixel) {
+
+        var feature = this.map.forEachFeatureAtPixel(pixel, function (feature) {
+            return feature;
+        });
+
+        if (feature) {
+            this.keys = feature.getKeys();
+            this.display = true;
+
+            var geom = feature.getGeometry();
+            if (geom.getType() == "LineString") {
+
+            }
+
+        }
+
+        /*  var info = document.getElementById('info');
+         if (feature) {
+         info.innerHTML = feature.getId() + ': ' + feature.get('name');
+         } else {
+         info.innerHTML = '&nbsp;';
+         }
+
+
+         if (feature !== highlight) {
+         if (highlight) {
+         featureOverlay.getSource().removeFeature(highlight);
+         }
+         if (feature) {
+         featureOverlay.getSource().addFeature(feature);
+         }
+         highlight = feature;
+         }
+         */
+
+    };
+
+
     constructor() {
+        this.keys = [];
     }
 }
