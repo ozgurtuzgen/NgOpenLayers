@@ -9,21 +9,126 @@
 </table>
 
 
-<p-dialog #pd width="400"  [resizable]="false" header="Bilgi" class="dialog" showEffect="fade" [(visible)]="display">
+<p-dialog #pd width="600"  [resizable]="false" header="Bilgi" class="dialog" showEffect="fade" [(visible)]="display">
     <header>
-        <div>
-            BİLGİ
-            <table  class="table table-striped" style="width:350px;font-size:11px">
-                <tr *ngFor="let n of keys">
-                <td>
-                <span>{{n.key}}</span>
-            </td>
-                <td>
-                    <span>{{n.value}}</span>
-                </td>
-                </tr>
-            </table>
-        </div>
+        <p-tabView>
+            <p-tabPanel header="Bilgi" leftIcon="fa-calendar">
+
+                <div>
+                    BİLGİ
+                    <table  class="table table-striped" style="width:350px;font-size:11px;">
+                        <tr *ngFor="let n of keys">
+                            <td>
+                                <span>{{n.key}}</span>
+                            </td>
+                            <td>
+                                <span>{{n.value}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </p-tabPanel>
+            <p-tabPanel header="Hakediş" leftIcon="fa-print">
+             <table class="table" style="font-size:11px;"><tr>
+                 <td>Sıra No</td>
+                 <td>İş Kalemi No</td>
+                 <td>Açıklama</td>
+                 <td>İşin Çeşidi</td>
+                 <td>Meslek Grubu</td>
+                 <td>Birimi</td>
+                 <td>Miktarı</td>
+                 <td> &nbsp;</td>
+             </tr>
+             <tr>
+                 <td>1</td>
+                 <td>EKOS-CTP-6-600</td>
+                 <td>600 mm Anma Çapında 6 Atm CTP ...</td>
+                 <td></td>
+                 <td></td>
+                 <td>metre</td>
+                 <td>3.012</td>
+                 <td>Güncelle Sil</td>
+             </tr>
+
+                 <tr>
+                     <td>&nbsp;</td>
+                     <td colspan="7">
+                         <table  style="font-size:11px;"><tr>
+                             <td>Alt İş Kalemi</td>
+                             <td>Oran (%)</td>
+                             <td>İşin Çeşidi</td>
+                             <td>Meslek Grubu</td>
+                         </tr>
+                         <tr>
+                             <td>Temin</td>
+                             <td>40</td>
+                             <td>Büro İşi</td>
+                             <td>yok</td>
+                         </tr>
+                             <tr>
+                                 <td>Döşeme</td>
+                                 <td>50</td>
+                                 <td>İnşaat İşi</td>
+                                 <td>İnşaat Mühendisi</td>
+                             </tr>
+                             <tr>
+                                 <td>Test</td>
+                                 <td>10</td>
+                                 <td>İnşaat İşi</td>
+                                 <td>İnşaat Mühendisi</td>
+                             </tr>
+                         </table>
+                     </td>
+                 </tr>
+                 <tr>
+                     <td>2</td>
+                     <td>EKOS-CTP-6-700</td>
+                     <td>700 mm anma çapında ...</td>
+                     <td></td>
+                     <td></td>
+                     <td>metre</td>
+                     <td>4.740</td>
+                     <td>Güncelle Sil</td>
+                 </tr>
+                 <tr>
+                     <td>&nbsp;</td>
+                     <td colspan="7">
+                         <table style="font-size:11px;"><tr>
+                             <td>Alt İş Kalemi</td>
+                             <td>Oran (%)</td>
+                             <td>İşin Çeşidi</td>
+                             <td>Meslek Grubu</td>
+                         </tr>
+                             <tr>
+                                 <td>Temin</td>
+                                 <td>40</td>
+                                 <td>Büro İşi</td>
+                                 <td>yok</td>
+                             </tr>
+                             <tr>
+                                 <td>Döşeme</td>
+                                 <td>50</td>
+                                 <td>İnşaat İşi</td>
+                                 <td>İnşaat Mühendisi</td>
+                             </tr>
+                             <tr>
+                                 <td>Test</td>
+                                 <td>10</td>
+                                 <td>İnşaat İşi</td>
+                                 <td>İnşaat Mühendisi</td>
+                             </tr>
+                         </table>
+                     </td>
+                 </tr>
+
+             </table>
+            </p-tabPanel>
+
+        </p-tabView>
+
+
+
     </header>
 
     <footer>

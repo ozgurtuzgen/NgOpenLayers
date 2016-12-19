@@ -2,15 +2,30 @@ import {STMMapComponent} from "./stm-map.component";
 import {Component, OnInit} from '@angular/core';
 import forEach = require("core-js/fn/array/for-each");
 import {KeyValue} from "./KeyValue";
+import {TreeNode} from "primeng/components/common/api";
+import {IsKalemleriService} from "./isKalemleri.service";
+import {Http} from "@angular/http";
+
 
 
 @Component({
     selector: "stm-map-toolbar-hakedis",
-    templateUrl: "./app/modules/city-module/MapToolbar/templates/hakedis.html"
+    templateUrl: "./app/modules/city-module/MapToolbar/templates/hakedis.html",
+    providers: [IsKalemleriService]
 })
 
 export class Hakedis
 {
+    isKalemleri: TreeNode[];
+
+    getIsKalemleriList(): void {
+        this.isKalemleriService.getIsKalemleri().then(isKalemleri => this.isKalemleri = isKalemleri);
+    }
+
+    constructor(private isKalemleriService: IsKalemleriService) {
+
+    }
+
     display:boolean=false;
     keys: KeyValue[];
 
@@ -20,6 +35,7 @@ export class Hakedis
 
     initialize(stmmap:STMMapComponent)
     {
+       // this.isKalemleri=TreeNode[];
         this.keys=[];
         this.stmMap=stmmap;
         this.map=this.stmMap.map;
@@ -32,7 +48,9 @@ export class Hakedis
         this.stmMap.addLayer("Hakedişler", vector);
     }
 
-
+    initializeIsKalemleri()
+    {
+    }
 
     getStyle(feature, resolution) {
         return new ol.style.Style({
@@ -63,6 +81,8 @@ export class Hakedis
 
     addHakedis(feature:ol.Feature,dist1:number,dist2:number)
     {
+        this.getIsKalemleriList();
+
         var geom=feature.getGeometry() as ol.geom.LineString;
 this.keys=[];
         var arr=feature.getKeys();
