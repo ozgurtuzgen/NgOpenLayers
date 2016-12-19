@@ -1,14 +1,26 @@
 import {STMMapComponent} from "./stm-map.component";
+import {Component, OnInit} from '@angular/core';
 import forEach = require("core-js/fn/array/for-each");
+import {KeyValue} from "./KeyValue";
+
+
+@Component({
+    selector: "stm-map-toolbar-hakedis",
+    templateUrl: "./app/modules/city-module/MapToolbar/templates/hakedis.html"
+})
 
 export class Hakedis
 {
+    display:boolean=false;
+    keys: KeyValue[];
+
     map: ol.Map;
     source: ol.source.Vector;
     stmMap: STMMapComponent;
 
     initialize(stmmap:STMMapComponent)
     {
+        this.keys=[];
         this.stmMap=stmmap;
         this.map=this.stmMap.map;
         this.source = new ol.source.Vector();
@@ -49,8 +61,19 @@ export class Hakedis
         this.source.clear();
     }
 
-    addHakedis(geom:ol.geom.LineString,dist1:number,dist2:number)
+    addHakedis(feature:ol.Feature,dist1:number,dist2:number)
     {
+        var geom=feature.getGeometry() as ol.geom.LineString;
+this.keys=[];
+        var arr=feature.getKeys();
+        for(let t of arr) {
+            var key = t;
+            var value = feature.get(t);
+            this.keys.push(new KeyValue(key, value));
+        }
+
+        this.display=true;
+
         var lineLength=geom.getLength();
         var fraction1=dist1/lineLength;
         var fraction2=dist2/lineLength;
@@ -91,6 +114,32 @@ export class Hakedis
 
         this.source.addFeature(feature);
     }
+
+    activate()
+    {
+        var selectClick = new ol.interaction.Select({
+            condition: ol.events.condition.click,
+            multi: true
+        });
+
+        selectClick.setHitTolerance(5);
+var context=this;
+
+        this.map.addInteraction(selectClick);
+        selectClick.on('select', function (e) {
+            var coll = e.target.getFeatures();
+            var length = coll.getLength();
+            if (length > 0) {
+                var features = coll.getArray();
+                var feature = features[0];
+                var geom = feature.getGeometry();
+                var line = geom as  ol.geom.LineString;
+                var lineLength = line.getLength();
+                context.addHakedis(feature, lineLength / 5, lineLength * 2 / 5);
+            }
+        }.bind(context));
+    }
+
 
     getCoordinateAtDist(geom:ol.geom.LineString,dist1:number)
     {

@@ -1,0 +1,32 @@
+<table>
+    <tr>
+        <td>
+            <button type="button" pTooltip="Hakediş ekle" (click)="activate()" pButton>
+              Hakediş ekle
+            </button>
+        </td>
+    </tr>
+</table>
+
+
+<p-dialog #pd width="400"  [resizable]="false" header="Bilgi" class="dialog" showEffect="fade" [(visible)]="display">
+    <header>
+        <div>
+            BİLGİ
+            <table  class="table table-striped" style="width:350px;font-size:11px">
+                <tr *ngFor="let n of keys">
+                <td>
+                <span>{{n.key}}</span>
+            </td>
+                <td>
+                    <span>{{n.value}}</span>
+                </td>
+                </tr>
+            </table>
+        </div>
+    </header>
+
+    <footer>
+
+    </footer>
+</p-dialog>

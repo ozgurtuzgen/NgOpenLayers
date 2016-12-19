@@ -17,12 +17,13 @@ import {STMMapToolbarAddShapefile} from './MapToolbar/map-toolbar-add-shapefile.
 import {STMMapToolbarMeasureDistance} from './MapToolbar/map-toolbar-measure-distance.component';
 import {STMMapToolbarSaveMap} from "./MapToolbar/map-toolbar-save-map.component";
 import {STMMapToolbarAddGeojson} from "./MapToolbar/map-toolbar-add-geojson.component";
+import {Hakedis} from "./hakedis";
 
 
 @NgModule({
     imports:      [ CommonModule, CityRoutingModule,FormsModule,DialogModule,DataListModule,OrderListModule,OverlayPanelModule ],
     declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,
-        STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance,STMMapToolbarSaveMap,STMMapToolbarAddGeojson],
+        STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance,STMMapToolbarSaveMap,STMMapToolbarAddGeojson,Hakedis],
     bootstrap:    [ STMAppComponent]
 })
 

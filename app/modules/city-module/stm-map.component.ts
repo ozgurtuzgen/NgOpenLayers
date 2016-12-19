@@ -9,35 +9,14 @@ import {Hakedis} from "./hakedis";
     selector: 'stm-map',
     template: `
 
+
   <div id="map" style="width:100%;height:100%" class="map"></div>
-
-  
-
-<p-dialog #pd [resizable]="false" header="Bilgi" class="dialog" showEffect="fade" [(visible)]="display">
-    <header>
-        <div>
-      BİLGİ 
- <ul>
-                <li *ngFor="let n of keys" >
-                    <span >{{n}}</span>
-                </li>
-            </ul>
-            
-        </div>
-    </header>
-
-    <footer>
-
-    </footer>
-</p-dialog>
-
 
     `
 })
 
 export class STMMapComponent implements OnInit {
 
-    hakedisLayer: Hakedis;
     keys: string[];
 
     @ViewChild("pd") private pd: Dialog;
@@ -139,7 +118,6 @@ export class STMMapComponent implements OnInit {
 
     ngOnInit(): void {
 
-
         this.layers = [];
 
         var layer = new ol.layer.Tile({
@@ -170,42 +148,14 @@ export class STMMapComponent implements OnInit {
         var toolbarFactory = new MapToolbarFactory();
         //  toolbarFactory.initializeToolbar(this.map);
 
-        var context = this;
+      /*  var context = this;
         this.map.on('click', function (evt) {
 
             //context.displayFeatureInfo(evt.pixel);
-        }.bind(context));
+        }.bind(context));*/
 
 
-        this.hakedisLayer = new Hakedis();
-        this.hakedisLayer.initialize(this);
 
-        var selectClick = new ol.interaction.Select({
-            condition: ol.events.condition.click,
-            multi: true
-        });
-
-        selectClick.setHitTolerance(5);
-
-        this.map.addInteraction(selectClick);
-        selectClick.on('select', function (e) {
-            var coll = e.target.getFeatures();
-            var length = coll.getLength();
-            if (length > 0) {
-                var features = coll.getArray();
-                var feature = features[0];
-                var geom = feature.getGeometry();
-                var line = geom as  ol.geom.LineString;
-                var lineLength = line.getLength();
-
-                context.hakedisLayer.addHakedis(line, lineLength / 5, lineLength * 2 / 5);
-            }
-
-            /* document.getElementById('status').innerHTML = '&nbsp;' +
-             e.target.getFeatures().getLength() +
-             ' selected features (last operation selected ' + e.selected.length +
-             ' and deselected ' + e.deselected.length + ' features)';*/
-        }.bind(context));
     }
 
     displayFeatureInfo = function (pixel: ol.Pixel) {

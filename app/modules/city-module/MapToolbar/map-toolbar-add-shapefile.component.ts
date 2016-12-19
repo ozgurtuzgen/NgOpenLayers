@@ -13,6 +13,8 @@ declare var shapefileName: string;
 
 export class STMMapToolbarAddShapefile implements OnInit {
 
+
+
     stmmap: STMMapComponent;
     display: boolean = false;
     loaded: boolean = false;
@@ -108,7 +110,7 @@ export class STMMapToolbarAddShapefile implements OnInit {
 
         loadshp({
             url: this.url,
-            encoding: 'big5',
+            encoding: 'windows-1254',
             EPSG: this.cs,
 
         }, this.returnData);
@@ -132,6 +134,13 @@ export class STMMapToolbarAddShapefile implements OnInit {
     showDialog() {
         this.display = true;
     }
+
+    showFeatureInfo(feature:ol.Feature)
+    {
+
+    }
+
+
 
 
 }
