@@ -29,18 +29,18 @@ export class Hakedis
             }),
             stroke: new ol.style.Stroke({
                 color: '#00ff00',
-                width: 2
+                width: 2,
             }),
             image: new ol.style.Circle({
                 radius: 7,
                 fill: new ol.style.Fill({
-                    color: '#ffcc33'
-                })
+                    color: '#ff0000'
+                }),
             })
-         /*   ,text: new ol.style.Text({
+            ,text: new ol.style.Text({
                 text: feature.get('name'),
                 offsetY: -10
-            })*/
+            })
         })
     }
 
@@ -65,14 +65,29 @@ export class Hakedis
 
         var coords=geom.getCoordinates();
         var newCoords= coords.slice(startIndex,endIndex);
-     //   newCoords.push(end);
-     //   newCoords.splice(0,0,start);
+      //  newCoords.push(start);
+
+
+        var startFeature=new ol.Feature({geometry:new ol.geom.Point(start),name:"start"});
+        var endFeature=new ol.Feature({geometry:new ol.geom.Point(end),name:"end"});
+
+        var startIndexFeature=new ol.Feature({geometry:new ol.geom.Point(coords[startIndex]),name:"start index"});
+        var endIndexFeature=new ol.Feature({geometry:new ol.geom.Point(coords[endIndex]),name:"end index"});
+
+     /*   this.source.addFeature(startFeature);
+        this.source.addFeature(endFeature);
+        this.source.addFeature(startIndexFeature);
+        this.source.addFeature(endIndexFeature);*/
+
+        newCoords.push(end);
+        newCoords.splice(0,0,start);
 
         var line=new ol.geom.LineString(newCoords);
 
         var feature = new ol.Feature({
             geometry: line
         });
+
 
         this.source.addFeature(feature);
     }
