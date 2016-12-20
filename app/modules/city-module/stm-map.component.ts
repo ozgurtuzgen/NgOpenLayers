@@ -154,6 +154,29 @@ export class STMMapComponent implements OnInit {
             //context.displayFeatureInfo(evt.pixel);
         }.bind(context));*/
 
+        var olMap = this.map;
+
+        // create control ui
+        var button = document.createElement('input');
+        button.type = "button";
+        button.value = "Show Zoom Level";
+        var element = document.createElement('div');
+        // button.className = 'ol-control';
+        element.appendChild(button);
+        element.style.top = "12px";
+        element.style.left = "12px";
+        element.style.position="absolute";
+
+        var alertZoomLevel = function (e) {
+            alert(olMap.getView().getZoom());
+        }.bind(olMap);
+
+        var alertZoomLevelControl = new ol.control.Control({
+            element: element
+        });
+
+        button.addEventListener('click', alertZoomLevel, false);
+        olMap.addControl(alertZoomLevelControl);
 
 
     }

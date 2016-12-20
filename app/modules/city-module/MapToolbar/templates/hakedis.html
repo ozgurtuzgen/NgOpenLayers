@@ -9,14 +9,14 @@
 </table>
 
 
-<p-dialog #pd width="600"  [resizable]="false" header="Bilgi" class="dialog" showEffect="fade" [(visible)]="display">
+<p-dialog #pd width="730"  height="550"  [resizable]="false"  class="dialog" showEffect="fade" [(visible)]="display">
     <header>
         <p-tabView>
             <p-tabPanel header="Bilgi" leftIcon="fa-calendar">
 
-                <div>
-                    BİLGİ
-                    <table  class="table table-striped" style="width:350px;font-size:11px;">
+                <div  style="overflow: scroll;height:400px;width:400px">
+
+                    <table  class="table table-striped" style="font-size:11px;">
                         <tr *ngFor="let n of keys">
                             <td>
                                 <span>{{n.key}}</span>
@@ -30,7 +30,9 @@
 
             </p-tabPanel>
             <p-tabPanel header="Hakediş" leftIcon="fa-print">
-             <table class="table" style="font-size:11px;"><tr>
+                <div  style="overflow: scroll;height:300px;width:600px">
+             <table class="table" style="font-size:11px;">
+                 <tr>
                  <td>Sıra No</td>
                  <td>İş Kalemi No</td>
                  <td>Açıklama</td>
@@ -54,7 +56,7 @@
                  <tr>
                      <td>&nbsp;</td>
                      <td colspan="7">
-                         <table  style="font-size:11px;"><tr>
+                         <table class="table"  style="font-size:11px;"><tr>
                              <td>Alt İş Kalemi</td>
                              <td>Oran (%)</td>
                              <td>İşin Çeşidi</td>
@@ -94,7 +96,7 @@
                  <tr>
                      <td>&nbsp;</td>
                      <td colspan="7">
-                         <table style="font-size:11px;"><tr>
+                         <table class="table" style="font-size:11px;"><tr>
                              <td>Alt İş Kalemi</td>
                              <td>Oran (%)</td>
                              <td>İşin Çeşidi</td>
@@ -123,6 +125,22 @@
                  </tr>
 
              </table>
+                    </div>
+                <div style="height:200px;width:300px;margin:12px">
+              <table ><tr>
+                  <td style="padding:4px">
+                      <p-spinner size="4" style="font-size:12px" [(ngModel)]="startMeter" [min]="0" [max]="10000"></p-spinner>
+              </td>
+                  <td style="padding:4px">
+                      <p-spinner size="4" style="font-size:12px" [(ngModel)]="endMeter" [min]="0" [max]="10000"></p-spinner>
+                  </td>
+                  <td style="padding:4px">
+                      <button pButton type="button" style="font-size:12px" label="Hakediş Ekle" (click)="addHakedis()">Hakediş Ekle</button>
+                  </td>
+
+              </tr></table>
+
+                </div>
             </p-tabPanel>
 
         </p-tabView>
