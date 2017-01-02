@@ -4,27 +4,34 @@ import forEach = require("core-js/fn/array/for-each");
 import {KeyValue} from "./KeyValue";
 import {TreeNode} from "primeng/components/common/api";
 import {IsKalemleriService} from "./isKalemleri.service";
-import {Http} from "@angular/http";
-
+import {IsaleHattiService} from "./isale-hatti.service";
+import {IsaleHatti} from "./isale-hatti";
 
 @Component({
     selector: "stm-map-toolbar-hakedis",
     templateUrl: "./app/modules/city-module/MapToolbar/templates/hakedis.html",
-    providers: [IsKalemleriService]
+    providers: [IsKalemleriService, IsaleHattiService]
 })
 
 export class Hakedis {
-    startMeter: number;
+    startMeter: number=0;
     endMeter: number;
-    selectedFeature: ol.Feature;
+    selectedFeatureList: ol.Feature[];
 
     isKalemleri: TreeNode[];
 
     getIsKalemleriList(): void {
-        this.isKalemleriService.getIsKalemleri().then(isKalemleri => this.isKalemleri = isKalemleri);
+        //   this.isKalemleriService.getIsKalemleri().then(isKalemleri => this.isKalemleri = isKalemleri);
+        // var isaleHattiList= this.isaleHatlariService.getIsaleHatlari();
+        var isaleHattiList = [];
+        var errorMessage = "";
+        this.isaleHatlariService.getIsaleHatlari()
+            .subscribe(
+                isaleHatlari => isaleHattiList = isaleHatlari,
+                error => errorMessage = <any>error);
     }
 
-    constructor(private isKalemleriService: IsKalemleriService) {
+    constructor(private isKalemleriService: IsKalemleriService, private isaleHatlariService: IsaleHattiService) {
 
     }
 
@@ -47,9 +54,12 @@ export class Hakedis {
         });
 
         this.stmMap.addLayer("Hakedişler", vector);
+        this.activate();
+        // this.getIsKalemleriList();
     }
 
     initializeIsKalemleri() {
+
     }
 
     getStyle(feature, resolution) {
@@ -81,49 +91,113 @@ export class Hakedis {
     addHakedis() {
         var dist1 = this.startMeter;
         var dist2 = this.endMeter;
-        var feature = this.selectedFeature;
-        var geom = feature.getGeometry() as ol.geom.LineString;
-        var lineLength = geom.getLength();
-        var fraction1 = dist1 / lineLength;
-        var fraction2 = dist2 / lineLength;
+        var featureList = this.selectedFeatureList;
+
+        var startFeature;
+        var endFeature;
+        var totalLength = 0;
+        var startFound = false;
+        var startFeatureIndex = -1;
+        var endFeatureIndex = -1;
+
+
+        for (var i = 0; i < featureList.length; i++) {
+            var geom = featureList[i].getGeometry() as ol.geom.LineString;
+            var length = geom.getLength();
+            if (!startFound) {
+                totalLength += length;
+                if (totalLength > this.startMeter) {
+                    startFeature = featureList[i];
+                    startFeatureIndex = i;
+                    startFound = true;
+                }
+            }
+
+            if (totalLength > this.endMeter) {
+                endFeature = featureList[i];
+                endFeatureIndex = i;
+                break;
+            }
+        }
+
+        var startLineGeom = startFeature.getGeometry() as ol.geom.LineString;
+        var startLineLength = geom.getLength();
+        var fraction1 = dist1 / startLineLength;
+
+        var endLineGeom = endFeature.getGeometry()as ol.geom.LineString;
+        var endLineLength = endLineGeom.getLength();
+
+        var fraction2 = dist2 / endLineLength;
         var startIndex = -1;
         var endIndex = -1;
         var index_param = {value: 0};
-        var start = geom.getCoordinateAt2(fraction1, index_param);
+        var startCoord = startLineGeom.getCoordinateAt2(fraction1, index_param);
         startIndex = index_param.value;
         startIndex++;
-        var end = geom.getCoordinateAt2(fraction2, index_param);
+
+        var endCoord = endLineGeom.getCoordinateAt2(fraction2, index_param);
         endIndex = index_param.value;
 
-        var coords = geom.getCoordinates();
-        var newCoords = coords.slice(startIndex, endIndex);
-        //  newCoords.push(start);
 
+        var resultGeom;
 
-        var startFeature = new ol.Feature({geometry: new ol.geom.Point(start), name: "start"});
-        var endFeature = new ol.Feature({geometry: new ol.geom.Point(end), name: "end"});
+        var resultGeomCoords;
+        if (startFeature == endFeature) {
+            var coords = startLineGeom.getCoordinates();
+            resultGeomCoords = coords.slice(startIndex, endIndex);
+            resultGeomCoords.push(endCoord);
+            resultGeomCoords.splice(0, 0, startCoord);
+            resultGeom = new ol.geom.LineString(resultGeomCoords);
+        }
+        else {
+            var startFeatureCoords = startLineGeom.getCoordinates();
+            var startSegmentCoords = coords.splice(startIndex, startFeatureCoords.length - 1);
 
-        var startIndexFeature = new ol.Feature({geometry: new ol.geom.Point(coords[startIndex]), name: "start index"});
-        var endIndexFeature = new ol.Feature({geometry: new ol.geom.Point(coords[endIndex]), name: "end index"});
+            var endFeatureCoords = endLineGeom.getCoordinates();
+            var endSegmentCoords = coords.splice(endIndex, endFeatureCoords.length - 1);
+
+            var resultCoordList: ol.Coordinate[][];
+
+            resultGeom = new ol.geom.MultiLineString(resultCoordList);
+            var startGeom = new ol.geom.LineString(startSegmentCoords);
+            resultGeom.appendLineString(startGeom);
+
+            var middleCoordsArray;
+            for (var i = startFeatureIndex + 1; i < endFeatureIndex; i++) {
+                var tempFeatureGeom = featureList[i].getGeometry() as ol.geom.LineString;
+                resultGeom.appendLineString(tempFeatureGeom);
+            }
+
+            var endLineString = new ol.geom.LineString(endSegmentCoords);
+            resultGeom.appendLineString(endLineString);
+        }
+
+        //  var startFeature = new ol.Feature({geometry: new ol.geom.Point(start), name: "start"});
+        //  var endFeature = new ol.Feature({geometry: new ol.geom.Point(end), name: "end"});
+
+        //  var startIndexFeature = new ol.Feature({geometry: new ol.geom.Point(coords[startIndex]), name: "start index"});
+        //   var endIndexFeature = new ol.Feature({geometry: new ol.geom.Point(coords[endIndex]), name: "end index"});
 
         /*   this.source.addFeature(startFeature);
          this.source.addFeature(endFeature);
          this.source.addFeature(startIndexFeature);
          this.source.addFeature(endIndexFeature);*/
 
-        newCoords.push(end);
-        newCoords.splice(0, 0, start);
-
-        var line = new ol.geom.LineString(newCoords);
 
         var feature = new ol.Feature({
-            geometry: line
+            geometry: resultGeom
         });
 
         this.source.addFeature(feature);
     }
 
-    displayHakedisWindow(feature: ol.Feature) {
+    displayHakedisWindow() {
+        var feature = this.selectedFeatureList[0];
+
+        var totalLength=this.getTotalLengthOfSelectedFeatures();
+        this.startMeter=0;
+        this.endMeter=totalLength;
+
         this.getIsKalemleriList();
 
         var geom = feature.getGeometry() as ol.geom.LineString;
@@ -136,6 +210,17 @@ export class Hakedis {
         }
 
         this.display = true;
+    }
+
+    getTotalLengthOfSelectedFeatures() {
+        var totalLength = 0;
+        for (var i = 0; i < this.selectedFeatureList.length; i++) {
+            var geom = this.selectedFeatureList[i].getGeometry() as ol.geom.LineString;
+            var length = geom.getLength();
+            totalLength += length;
+        }
+
+        return length;
     }
 
     activate() {
@@ -153,12 +238,9 @@ export class Hakedis {
             var length = coll.getLength();
             if (length > 0) {
                 var features = coll.getArray();
-                var feature = features[0];
-                var geom = feature.getGeometry();
-                var line = geom as  ol.geom.LineString;
-                var lineLength = line.getLength();
-                context.selectedFeature = feature;
-                context.displayHakedisWindow(feature);
+
+                context.selectedFeatureList = features;
+                // context.displayHakedisWindow(feature);
                 // context.addHakedis(feature, lineLength / 5, lineLength * 2 / 5);
             }
         }.bind(context));

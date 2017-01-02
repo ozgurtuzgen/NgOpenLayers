@@ -6,6 +6,7 @@ import { BasicModule }      from './modules/basic-module/basic.module';
 /* Routing Module */
 import { AppRoutingModule }   from './routing.module'
 
+
 @NgModule({
     imports:      [ BrowserModule, AppRoutingModule, BasicModule ],
     declarations: [ AppComponent ],

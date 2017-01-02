@@ -40,7 +40,7 @@ import {Hakedis} from "../hakedis";
 
 </td>
 <td>
-<button value="Hakedişleri Sil" (click)="deleteHakedis()" title="Hakedişleri sil">Hakedişleri sil</button>
+<button value="Hakedişleri Sil" (click)="deleteHakedis()" title="Hakedişleri sil" style="font-size:11px">Hakedişleri sil</button>
 </td>
 
 </tr></table>
