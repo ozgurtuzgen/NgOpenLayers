@@ -1,6 +1,7 @@
-import {Component, OnInit, Input, Output} from '@angular/core';
+import {Component, OnInit, Input, Output,ViewChild} from '@angular/core';
 import {STMLayer} from "./stm-layer";
 import {STMMapComponent} from "./stm-map.component";
+import {STMMapAttributeTable} from "./MapToolbar/map-attribute-table.component";
 
 @Component({
     selector: 'stm-layer-list',
@@ -53,34 +54,14 @@ import {STMMapComponent} from "./stm-map.component";
   </table>
   
   
-  
-<p-dialog [resizable]="false" width="600" header="{{selectedLayerName}}" class="dialog" showEffect="fade" [(visible)]="isFeatureGridVisible">
-    <header >
-        <div>
-            <!--   <a href="#" id="popup-closer" class="ol-popup-closer"></a>-->
-
-        </div>
-    </header>
-
-  
-     <div  style="height:400px;width:400px">
-         <table id="tblFeatureList" class="table table-striped" style="font-size:11px;">
-  </table>
-  
-  
-</div>
-
-    <footer>
-
-
-    </footer>
-</p-dialog>
-
+  <stm-map-attribute-table #attributeTable></stm-map-attribute-table>
 
     `
 })
 
 export class STMLayerList implements OnInit {
+
+    @ViewChild("attributeTable") private attributeTable: STMMapAttributeTable;
 
     stmMap: STMMapComponent;
     layerlist: STMLayer[];
@@ -111,9 +92,7 @@ export class STMLayerList implements OnInit {
 
     }
 
-    constructor() {
-        this.layerlist = [];
-    }
+
 
     deleteLayer(layer: STMLayer) {
         if (layer.isUserDefined) {
@@ -140,54 +119,12 @@ export class STMLayerList implements OnInit {
 
     setMap(stmMap: STMMapComponent) {
         this.stmMap = stmMap;
+        this.attributeTable.setMap(stmMap);
     }
 
-    isFeatureGridVisible: boolean = false;
-
-    selectedLayerName: string;
 
     showFeatureInfo(layer: STMLayer) {
-        this.selectedLayerName = layer.name + " - Öznitelik Bilgileri";
-        this.isFeatureGridVisible = true;
-        var vector = layer.layer as ol.layer.Vector;
-        var src = vector.getSource();
-        var featureList = src.getFeatures();
-        var table = document.getElementById("tblFeatureList") as HTMLTableElement;
-
-        table.innerHTML = "";
-
-        var thead = table.createTHead();
-        var tbody = table.createTBody();
-
-        for (var i = 0; i < featureList.length; i++) {
-            var feature = featureList[i];
-            var keyList = feature.getKeys();
-            if (i == 0) // add header columns
-            {
-                var tr = document.createElement("tr");
-
-                for (var k = 0; k < keyList.length; k++) {
-                    var td = document.createElement("td");
-                    td.innerText = keyList[k];
-                    tr.appendChild(td);
-                }
-                thead.appendChild(tr);
-
-            }
-            var tr = document.createElement("tr");
-            for (var j = 0; j < 10; j++) {
-                var tr = document.createElement("tr");
-                for (var k = 0; k < keyList.length; k++) {
-                    var td = document.createElement("td");
-                    td.innerText = feature.get(keyList[k]);
-                    tr.appendChild(td);
-                }
-
-                tbody.appendChild(tr);
-            }
-        }
-        table.appendChild(thead);
-        table.appendChild(tbody);
+        this.attributeTable.showFeatureInfo(layer);
     }
 
 

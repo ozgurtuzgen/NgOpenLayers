@@ -1,0 +1,38 @@
+
+<p-dialog [resizable]="false" width="600" header="{{title}}" class="dialog" showEffect="fade" [(visible)]="isVisible">
+    <header >
+        <div>
+            <!--   <a href="#" id="popup-closer" class="ol-popup-closer"></a>-->
+
+        </div>
+    </header>
+
+
+    <div  style="height:400px;width:400px">
+        <table id="tblFeatureList" class="table table-striped" style="font-size:11px;">
+            <thead> <tr>
+            <td>&nbsp;</td>
+           <td  *ngFor="let n of keys">
+{{n}}
+            </td></tr>
+
+            </thead>
+            <tbody>
+            <tr  *ngFor="let feature of featureList">
+                <td>
+
+                    <img  style="width: 12px;height:12px" src="app/img/zoom-in.png" (click)="zoomToFeature(feature)"  title="Detaya Git" >
+                </td>
+
+                <td *ngFor="let n of keys"> {{feature.get(n)}}</td></tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <footer>
+
+
+    </footer>
+</p-dialog>
