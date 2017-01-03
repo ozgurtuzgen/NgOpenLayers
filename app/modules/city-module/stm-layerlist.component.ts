@@ -124,8 +124,7 @@ export class STMLayerList implements OnInit {
         this.stmMap.map.removeLayer(layer.layer);
     }
 
-    getDisplay(isVisible:boolean)
-    {
+    getDisplay(isVisible: boolean) {
         var result = "block";
         if (!isVisible)
             result = "none";
@@ -145,15 +144,18 @@ export class STMLayerList implements OnInit {
 
     isFeatureGridVisible: boolean = false;
 
-    selectedLayerName:string;
+    selectedLayerName: string;
 
     showFeatureInfo(layer: STMLayer) {
-        this.selectedLayerName=layer.name +" - Öznitelik Bilgileri";
+        this.selectedLayerName = layer.name + " - Öznitelik Bilgileri";
         this.isFeatureGridVisible = true;
         var vector = layer.layer as ol.layer.Vector;
         var src = vector.getSource();
         var featureList = src.getFeatures();
         var table = document.getElementById("tblFeatureList") as HTMLTableElement;
+
+        table.innerHTML = "";
+
         var thead = table.createTHead();
         var tbody = table.createTBody();
 
