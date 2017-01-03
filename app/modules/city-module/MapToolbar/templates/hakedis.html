@@ -10,11 +10,11 @@
 
 
 <p-dialog #pd width="730"  height="550"  [resizable]="false"  class="dialog" showEffect="fade" [(visible)]="display">
-    <header>
+
         <p-tabView>
             <p-tabPanel header="Bilgi" leftIcon="fa-calendar">
 
-                <div  style="overflow: scroll;height:400px;width:400px">
+                <div  style="height:400px;width:400px">
 
                     <table  class="table table-striped" style="font-size:11px;">
                         <tr *ngFor="let n of keys">
@@ -30,7 +30,9 @@
 
             </p-tabPanel>
             <p-tabPanel header="Hakediş" leftIcon="fa-print">
-                <div  style="overflow: scroll;height:200px;width:600px">
+
+                <table><tr><td>
+                <div  style="border:solid 1px #777777;width:600px">
              <table class="table" style="font-size:11px;">
                  <tr>
                  <td>Sıra No</td>
@@ -42,7 +44,7 @@
                  <td>Miktarı</td>
                  <td> &nbsp;</td>
              </tr>
-             <tr>
+             <tr style="background-color:#186BA0;color: white">
                  <td>1</td>
                  <td>EKOS-CTP-6-600</td>
                  <td>600 mm Anma Çapında 6 Atm CTP ...</td>
@@ -50,7 +52,6 @@
                  <td></td>
                  <td>metre</td>
                  <td>3.012</td>
-                 <td>Güncelle Sil</td>
              </tr>
 
                  <tr>
@@ -68,47 +69,7 @@
                              <td>Büro İşi</td>
                              <td>yok</td>
                          </tr>
-                             <tr>
-                                 <td>Döşeme</td>
-                                 <td>50</td>
-                                 <td>İnşaat İşi</td>
-                                 <td>İnşaat Mühendisi</td>
-                             </tr>
-                             <tr>
-                                 <td>Test</td>
-                                 <td>10</td>
-                                 <td>İnşaat İşi</td>
-                                 <td>İnşaat Mühendisi</td>
-                             </tr>
-                         </table>
-                     </td>
-                 </tr>
-                 <tr>
-                     <td>2</td>
-                     <td>EKOS-CTP-6-700</td>
-                     <td>700 mm anma çapında ...</td>
-                     <td></td>
-                     <td></td>
-                     <td>metre</td>
-                     <td>4.740</td>
-                     <td>Güncelle Sil</td>
-                 </tr>
-                 <tr>
-                     <td>&nbsp;</td>
-                     <td colspan="7">
-                         <table class="table" style="font-size:11px;"><tr>
-                             <td>Alt İş Kalemi</td>
-                             <td>Oran (%)</td>
-                             <td>İşin Çeşidi</td>
-                             <td>Meslek Grubu</td>
-                         </tr>
-                             <tr>
-                                 <td>Temin</td>
-                                 <td>40</td>
-                                 <td>Büro İşi</td>
-                                 <td>yok</td>
-                             </tr>
-                             <tr>
+                             <tr style="background-color:#186BA0;color:white">
                                  <td>Döşeme</td>
                                  <td>50</td>
                                  <td>İnşaat İşi</td>
@@ -126,28 +87,38 @@
 
              </table>
                     </div>
-                <div style="height:200px;width:300px;margin:12px">
-              <table ><tr>
+                    </td></tr>
+                    <tr><td>
+                <div style="margin:12px;">
+                    <table style="width:100%"><tr><td align="left">
+              <table style="font-size:12px;" id="tblSingleFeatureTable"><tr>
+                  <td>Başlangıç Metrajı</td>
                   <td style="padding:4px">
-                      <p-spinner size="4" style="font-size:12px" [(ngModel)]="startMeter" [min]="0" [max]="10000"></p-spinner>
+                      <p-spinner size="10" style="font-size:12px;"  [(ngModel)]="startMeter" [min]="0" [max]="10000"></p-spinner>
               </td>
+                  <td>m</td>
+
+                  <td style="padding-left:12px">Bitiş Metrajı</td>
                   <td style="padding:4px">
-                      <p-spinner size="4" style="font-size:12px" [(ngModel)]="endMeter" [min]="0" [max]="10000"></p-spinner>
+                      <p-spinner size="10" style="font-size:12px" [(ngModel)]="endMeter" [min]="0" [max]="9999999"></p-spinner>
                   </td>
-                  <td style="padding:4px">
-                      <button pButton type="button" style="font-size:12px" label="Hakediş Ekle" (click)="addHakedis()">Hakediş Ekle</button>
-                  </td>
+                  <td>m</td>
 
               </tr></table>
+</td>
+                        <td align="right">
+                            <button pButton type="button" style="font-size:12px" label="Hakediş Ekle" (click)="addHakedis()">Tamamlandı</button>
 
+
+                        </td></tr></table>
                 </div>
+                   </td></tr></table>
             </p-tabPanel>
 
         </p-tabView>
 
 
 
-    </header>
 
     <footer>
 

@@ -25,6 +25,26 @@ export class STMMapComponent implements OnInit {
     map: ol.Map;
     layers: STMLayer[];
 
+    getSTMLayer(olLayer:ol.layer.Layer)
+    {
+        for(var i=0;i<this.layers.length;i++)
+        {
+            if(this.layers[i].layer==olLayer)
+            {
+                return this.layers[i];
+            }
+        }
+    }
+
+    isHakedisKatmani(layer:ol.layer.Layer) {
+
+        var result=false;
+        var stmLayer = this.getSTMLayer(layer);
+        if(stmLayer) {
+            result= stmLayer.isHakedisGirisKatmani;
+        }
+        return result;
+    }
 
     addVector() {
         /*    var geojsonObject = {
@@ -94,12 +114,13 @@ export class STMMapComponent implements OnInit {
         }));
     }
 
-    addLayer(name: string, layer: ol.layer.Layer, isUserDefined: boolean = false) {
+    addLayer(name: string, layer: ol.layer.Layer, isUserDefined: boolean = false,isHakedisGirisLayer:boolean=false) {
 
         var stmLayer = new STMLayer();
         stmLayer.name = name;
         stmLayer.layer = layer;
         stmLayer.isUserDefined = isUserDefined;
+        stmLayer.isHakedisGirisKatmani=isHakedisGirisLayer;
         this.layers.push(stmLayer);
         this.map.addLayer(layer);
     }
@@ -114,6 +135,18 @@ export class STMMapComponent implements OnInit {
                 break;
             }
         }
+    }
+
+    getHakedisGirisLayers()
+    {
+        var arr=[];
+        for (var i = 0; i < this.layers.length; i++) {
+            if (this.layers[i].isHakedisGirisKatmani) {
+                arr.push(this.layers[i]);
+            }
+        }
+
+        return arr;
     }
 
     ngOnInit(): void {
@@ -153,9 +186,9 @@ export class STMMapComponent implements OnInit {
 
             //context.displayFeatureInfo(evt.pixel);
         }.bind(context));*/
-
-
     }
+
+
 
     displayFeatureInfo = function (pixel: ol.Pixel) {
 
