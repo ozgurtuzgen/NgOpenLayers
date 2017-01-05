@@ -124,7 +124,7 @@ export class STMLayerList implements OnInit {
 
 
     showFeatureInfo(layer: STMLayer) {
-        this.attributeTable.showFeatureInfo(layer);
+       this.attributeTable.showFeatureInfo(layer);
     }
 
 

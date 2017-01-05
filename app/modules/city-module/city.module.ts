@@ -25,10 +25,11 @@ import {SpinnerModule} from 'primeng/primeng';
 import { HttpModule } from '@angular/http';
 import { requestOptionsProvider }   from '../../default-request-options.service';
 import {STMMapAttributeTable} from "./MapToolbar/map-attribute-table.component";
+import {DataTableModule} from 'primeng/primeng';
 
 @NgModule({
     imports:      [ HttpModule, CommonModule, CityRoutingModule,FormsModule,DialogModule,DataListModule,OrderListModule,OverlayPanelModule,
-        TabViewModule,TreeTableModule,SharedModule,InputTextModule,SpinnerModule ],
+        TabViewModule,TreeTableModule,SharedModule,InputTextModule,SpinnerModule,DataTableModule ],
     declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,STMMapAttributeTable,
         STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance,STMMapToolbarSaveMap,STMMapToolbarAddGeojson,Hakedis],
     providers: [ requestOptionsProvider ],

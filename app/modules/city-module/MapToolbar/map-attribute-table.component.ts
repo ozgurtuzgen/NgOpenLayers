@@ -9,7 +9,7 @@ import {STMMapComponent} from "../stm-map.component";
 
 export class STMMapAttributeTable {
 
-
+    zoomToFeatureIterator:string[];
 
     isVisible: boolean = false;
     stmLayer: STMLayer;
@@ -19,10 +19,13 @@ export class STMMapAttributeTable {
     featureList:ol.Feature[];
     stmMap:STMMapComponent;
     selectInteraction:ol.interaction.Select;
+    selectedFeature:ol.Feature;
 
     constructor() {
         this.keys = [];
         this.featureList=[];
+        this.zoomToFeatureIterator=[];
+        this.zoomToFeatureIterator.push("aa");
     }
 
     setMap(stmmap:STMMapComponent)
@@ -42,6 +45,7 @@ export class STMMapAttributeTable {
 
 
     zoomToFeature(feature:ol.Feature) {
+        this.selectedFeature=feature;
         var features = this.selectInteraction.getFeatures();
         features.clear();
         features.push(feature);
@@ -51,7 +55,7 @@ export class STMMapAttributeTable {
     }
 
     showFeatureInfo(layer: STMLayer) {
-        this.keys = [];
+     //   this.keys = [];
 
         this.isVisible = true;
         this.stmLayer = layer;
@@ -60,9 +64,9 @@ export class STMMapAttributeTable {
         var vector = layer.layer as ol.layer.Vector;
         var src = vector.getSource();
         this.featureList = src.getFeatures();
-        var table = document.getElementById("tblFeatureList") as HTMLTableElement;
+      //  var table = document.getElementById("tblFeatureList") as HTMLTableElement;
 
-        var tbody = table.createTBody();
+       // var tbody = table.createTBody();
      //   var thead = table.createTHead();
 
         if (this.featureList.length > 0) {
