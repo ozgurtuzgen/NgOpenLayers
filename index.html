@@ -29,9 +29,9 @@
     <script src="app/lib/preview.js"></script>
 
 
-  <!--  <script type="text/javascript" src="node_modules/ol3-cesium/dist/ol3cesium-debug.js"></script>
-    <script type="text/javascript" src="node_modules/ol3-cesium/dist/Cesium/Cesium.js"></script>-->
-    <script type="text/javascript" src="node_modules/openlayers/dist/ol-debug.js"></script>
+    <script type="text/javascript" src="node_modules/ol3-cesium/dist/ol3cesium-debug.js"></script>
+    <script type="text/javascript" src="node_modules/ol3-cesium/dist/Cesium/Cesium.js"></script>
+  <!--  <script type="text/javascript" src="node_modules/openlayers/dist/ol-debug.js"></script>-->
     <script type="text/javascript">
 
         var shapefileName = '';
@@ -40,20 +40,56 @@
         var ol3d;
         var scene;
         var terrainProvider;
-        function create3d(olmap) {
+               function create3d(olmap) {
             ol3d = new olcs.OLCesium({map: olmap});
             scene = ol3d.getCesiumScene();
             terrainProvider = new Cesium.CesiumTerrainProvider({
                 url: '//assets.agi.com/stk-terrain/world'
             });
             scene.terrainProvider = terrainProvider;
+
+           ol3d.getDataSources().add(Cesium.KmlDataSource.load(
+                    './app/testdata/gdpPerCapita2008_2.kmz', {
+                        camera: scene.camera,
+                        canvas: scene.canvas
+                    }
+            ));
+
+                //   createModel("./app/testdata/Cesium_Air.glb", 5000.0);
+
+               }
+
+        function createModel(url, height) {
+           // viewer.entities.removeAll();
+
+            var position = Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706, height);
+            var heading = Cesium.Math.toRadians(135);
+            var pitch = 0;
+            var roll = 0;
+            var hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+            var orientation = Cesium.Transforms.headingPitchRollQuaternion(position, hpr);
+
+            var entities=ol3d.getEntities();
+            var entity = entities.add({
+                name : url,
+                position : position,
+                orientation : orientation,
+                model : {
+                    uri : url,
+                    minimumPixelSize : 128,
+                    maximumScale : 20000
+                }
+            });
+            ol3d.trackedEntity = entity;
         }
+
 
         function toggle3d() {
             ol3d.setEnabled(!ol3d.getEnabled());
         }
 
         var addGeojsonTool = null;
+        var addKmlTool=null;
 
     </script>
 

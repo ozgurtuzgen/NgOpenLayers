@@ -162,8 +162,8 @@ export class STMMapComponent implements OnInit {
             layers: [],
             controls: ol.control.defaults({attribution: false, zoom: false}),
             view: new ol.View({
-                center: ol.proj.fromLonLat([39, 33]),
-                zoom: 4
+                center: ol.proj.fromLonLat([-79.24756180000, 43.1552386000]),
+                zoom:13
             })
         });
 

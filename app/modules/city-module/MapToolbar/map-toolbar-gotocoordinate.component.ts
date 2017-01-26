@@ -40,7 +40,7 @@ export class STMMapToolbarGoToCoordinate {
 
         var view = new ol.View({
             center: ol.proj.fromLonLat([coord[0], coord[1]]),
-            zoom: 8
+            zoom: 16
         });
 
         this.stmmap.map.setView(view);

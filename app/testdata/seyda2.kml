@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?><kml xmlns='http://www.opengis.net/kml/2.2' xmlns:atom='http://www.w3.org/2005/Atom'><Document><name>kmlfactbook.org</name><atom:link href='http://www.kmlfactbook.org'/><atom:generator url='http://www.kmlfactbook.org'>kmlfactbook.org</atom:generator><StyleMap id='kmlfactbook_style1'><Pair><key>normal</key><styleUrl>#kmlfactbook_style1norm</styleUrl></Pair><Pair><key>highlight</key><styleUrl>#kmlfactbook_style1hi</styleUrl></Pair></StyleMap><Style id='kmlfactbook_style1norm'><LineStyle><color>FF000000</color></LineStyle><LabelStyle><scale>1.0</scale></LabelStyle><IconStyle><scale>3</scale></IconStyle>
+<BalloonStyle><bgColor>ffE0D3CD</bgColor></BalloonStyle></Style><Folder><name>2008</name>
+<Placemark><styleUrl>#kmlfactbook_style1</styleUrl><Style><PolyStyle><color>E50000ff</color></PolyStyle><IconStyle><Icon><href>files/flag/qa.gif</href></Icon></IconStyle></Style><name>
+
+<![CDATA[Qatar]]></name><Snippet></Snippet><ExtendedData>
+<Data name='cc'><value>qa</value></Data><Data name='name'><value>
+<![CDATA[Qatar]]></value></Data><Data name='data'><value>87,600</value>
+</Data><Data name='rank'><value>1</value></Data></ExtendedData>
+<MultiGeometry><altitudeMode>relativeToGround</altitudeMode>
+<extrude>1</extrude><Point><coordinates>51.192,25.0784,2000000</coordinates>
+<altitudeMode>relativeToGround</altitudeMode></Point><Polygon><extrude>1</extrude>
+<altitudeMode>relativeToGround</altitudeMode><outerBoundaryIs><LinearRing>
+<coordinates>
+-79.24756180000001,43.15523860000002,36.00000000000001 -79.2473384,43.15514960000001,36.00000000000001 -79.24739460000004,43.15506490000004,36.00000000000001 -79.24720829999998,43.15499449999997,36.00000000000001 -79.24717369999998,43.15504799999996,36.00000000000001 -79.24695989999997,43.15497270000004,36.00000000000001 -79.24676879999996,43.15523089999999,36.00000000000001 -79.24664709999999,43.15518400000002,36.00000000000001 -79.24666880000004,43.15515280000004,36.00000000000001 -79.24649519999998,43.15509160000001,36.00000000000001 -79.24640050000004,43.15520720000002,36.00000000000001 -79.24616090000002,43.155118,36.00000000000001 -79.24622340000003,43.15502889999998,36.00000000000001 -79.24598390000001,43.15493519999994,36.00000000000001 -79.24590079999997,43.15518150000001,36.00000000000001 -79.24721630000003,43.15571050000002,36.00000000000001 -79.24756180000001,43.15523860000002,36.00000000000001 
+ </coordinates>
+</LinearRing></outerBoundaryIs></Polygon></MultiGeometry></Placemark>
+
+</Folder>
+</Document></kml>

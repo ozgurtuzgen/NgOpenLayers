@@ -1,0 +1,42 @@
+<table>
+    <tr>
+        <td>
+            <button ptooltip="Kml dosyası ekle" type="button" (click)="showDialog()" pButton>
+               GIS Verilerini Yükle
+            </button>
+        </td>
+    </tr>
+</table>
+
+<p-dialog [resizable]="false" header="GIS Verilerini Yükle" class="dialog" showEffect="fade" [(visible)]="display">
+    <header>
+        <div>
+            <!--   <a href="#" id="popup-closer" class="ol-popup-closer"></a>-->
+
+        </div>
+    </header>
+
+    <div>
+
+        <div class="form-group">
+            <input type="file" id="inputFileGIS" accept="application/zip">
+        </div>
+
+
+        <table style="width:100%; font-family: tahoma;font-size:11px">
+            <tr>
+                <td>
+                    <button pButton type="text" (click)="loadGIS()">Tamam</button>
+                </td>
+                <td>
+                    <button pButton type="text" (click)="closeDialog()" icon="fa-close">Kapat</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <footer>
+
+
+    </footer>
+</p-dialog>
