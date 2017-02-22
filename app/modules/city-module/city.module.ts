@@ -27,12 +27,13 @@ import { requestOptionsProvider }   from '../../default-request-options.service'
 import {STMMapAttributeTable} from "./MapToolbar/map-attribute-table.component";
 import {DataTableModule} from 'primeng/primeng';
 import {STMMapToolbarAddKml} from './MapToolbar/map-toolbar-add-kml.component';
+import {STMMapToolbarAddWMS} from './MapToolbar/add-wms.component'
 
 @NgModule({
     imports:      [ HttpModule, CommonModule, CityRoutingModule,FormsModule,DialogModule,DataListModule,OrderListModule,OverlayPanelModule,
         TabViewModule,TreeTableModule,SharedModule,InputTextModule,SpinnerModule,DataTableModule ],
     declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,STMMapAttributeTable,
-        STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance,STMMapToolbarSaveMap,STMMapToolbarAddGeojson,Hakedis,STMMapToolbarAddKml],
+        STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance,STMMapToolbarSaveMap,STMMapToolbarAddGeojson,Hakedis,STMMapToolbarAddKml,STMMapToolbarAddWMS],
     providers: [ requestOptionsProvider ],
     bootstrap:    [ STMAppComponent]
 })

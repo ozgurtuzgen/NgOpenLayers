@@ -9,6 +9,7 @@ import {STMMapToolbarSaveMap} from "./map-toolbar-save-map.component";
 import {STMMapToolbarAddGeojson} from "./map-toolbar-add-geojson.component";
 import {Hakedis} from "../hakedis";
 import {STMMapToolbarAddKml} from "./map-toolbar-add-kml.component";
+import {STMMapToolbarAddWMS} from "./add-wms.component";
 
 @Component({
     selector: "stm-map-toolbar",
@@ -31,6 +32,9 @@ import {STMMapToolbarAddKml} from "./map-toolbar-add-kml.component";
 </td>
 <td>
 <stm-map-toolbar-addKml #toolItemAddKml></stm-map-toolbar-addKml>
+</td>
+<td>
+<stm-map-toolbar-addwms #toolItemAddWMS></stm-map-toolbar-addwms>
 </td>
 <td>
 <stm-map-toolbar-measure-distance #toolItemMeasureDistance></stm-map-toolbar-measure-distance>
@@ -62,6 +66,7 @@ export class STMMapToolbar {
     @ViewChild("toolItemMeasureDistance") private itemMeasureDistance: STMMapToolbarMeasureDistance;
     @ViewChild("toolItemSaveMap") private itemSaveMap: STMMapToolbarSaveMap;
     @ViewChild("hakedisLayer") hakedisLayer: Hakedis;
+    @ViewChild("toolItemAddWMS") private itemAddWMS: STMMapToolbarAddWMS;
 
     map: STMMapComponent;
 
@@ -76,6 +81,7 @@ export class STMMapToolbar {
         this.itemSaveMap.setMap(stmMap);
         this.hakedisLayer.initialize(stmMap);
         this.itemAddKml.setMap(stmMap);
+        this.itemAddWMS.setMap(stmMap);
     }
 
     deleteHakedis()

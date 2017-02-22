@@ -1,0 +1,53 @@
+<table>
+    <tr>
+        <td>
+            <button ptooltip="WMS ekle" type="button" (click)="showDialog()" pButton>
+                <img title="WMS ekle" src="./app/img/shp.png" width="20px" height="20px">
+            </button>
+        </td>
+    </tr>
+</table>
+
+
+<p-dialog [resizable]="false" header="WMS Ekle" class="dialog" showEffect="fade" [(visible)]="display">
+    <header>
+        <div>
+            <!--   <a href="#" id="popup-closer" class="ol-popup-closer"></a>-->
+
+        </div>
+    </header>
+
+    <div>
+
+        <div class="form-group">
+            <label for="tburl" >URL</label>
+            <input class="form-control" type="text" [(ngModel)]="url" id="tbURL">
+        </div>
+
+        <div class="form-group">
+            <label for="tblayer">Layer</label>
+            <input class="form-control" type="text" [(ngModel)]="layer" id="tbLayer">
+        </div>
+
+        <div class="form-group">
+            <label for="tbservertype">Server Type</label>
+            <input class="form-control" type="text" [(ngModel)]="serverType" id="tbServerType">
+        </div>
+
+        <table style="width:100%; font-family: tahoma;font-size:11px">
+            <tr>
+                <td>
+                    <button pButton type="text" (click)="addWMS()">Tamam</button>
+                </td>
+                <td>
+                    <button pButton type="text" (click)="closeDialog()" icon="fa-close">Kapat</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <footer>
+
+
+    </footer>
+</p-dialog>
