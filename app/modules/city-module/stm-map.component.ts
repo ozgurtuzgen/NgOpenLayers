@@ -4,6 +4,8 @@ import {STMLayer} from "./stm-layer";
 import {MapToolbarFactory} from "./MapToolbar/MapToolbarFactory"
 import {Dialog} from "primeng/components/dialog/dialog";
 import {Hakedis} from "./hakedis";
+import {IsaleHatti} from "./isale-hatti";
+import { EventEmitter } from "@angular/core";
 
 @Component({
     selector: 'stm-map',
@@ -93,7 +95,6 @@ export class STMMapComponent implements OnInit {
             }]
         };
 
-
         var vectorSource = new ol.source.Vector({
             features: (new ol.format.GeoJSON()).readFeatures(geojsonObject)
         });
@@ -125,6 +126,16 @@ export class STMMapComponent implements OnInit {
         this.map.addLayer(layer);
     }
 
+    addSTMLayer(stmLayer:STMLayer)
+    {
+        this.layers.push(stmLayer);
+        this.map.addLayer(stmLayer.layer);
+    }
+
+    addIsaleLayer()
+    {
+
+    }
 
     removeLayer(layer: ol.layer.Layer) {
 
@@ -181,11 +192,11 @@ export class STMMapComponent implements OnInit {
         var toolbarFactory = new MapToolbarFactory();
         //  toolbarFactory.initializeToolbar(this.map);
 
-      /*  var context = this;
+        var context = this;
         this.map.on('click', function (evt) {
 
-            //context.displayFeatureInfo(evt.pixel);
-        }.bind(context));*/
+            context.displayFeatureInfo(evt.pixel);
+        }.bind(context));
     }
 
 
@@ -195,17 +206,26 @@ export class STMMapComponent implements OnInit {
         var feature = this.map.forEachFeatureAtPixel(pixel, function (feature) {
             return feature;
         });
-
-        if (feature) {
-            this.keys = feature.getKeys();
-            this.display = true;
-
-            var geom = feature.getGeometry();
-            if (geom.getType() == "LineString") {
-
-            }
-
+        var isaleHatti = feature as IsaleHatti;
+        if (isaleHatti) {
+            if (isaleHatti.isaleHattiClicked)
+                isaleHatti.isaleHattiClicked.emit();
         }
+
+        /*  var feature = this.map.forEachFeatureAtPixel(pixel, function (feature) {
+         return feature;
+         });
+
+         if (feature) {
+         this.keys = feature.getKeys();
+         this.display = true;
+
+         var geom = feature.getGeometry();
+         if (geom.getType() == "LineString") {
+
+         }
+
+         }*/
 
         /*  var info = document.getElementById('info');
          if (feature) {

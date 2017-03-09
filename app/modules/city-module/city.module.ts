@@ -28,12 +28,15 @@ import {STMMapAttributeTable} from "./MapToolbar/map-attribute-table.component";
 import {DataTableModule} from 'primeng/primeng';
 import {STMMapToolbarAddKml} from './MapToolbar/map-toolbar-add-kml.component';
 import {STMMapToolbarAddWMS} from './MapToolbar/add-wms.component'
+import {STMMapToolbarAddWFS} from "./MapToolbar/add-wfs.component";
+import {STMAddIsaleHattiComponent} from "./MapToolbar/isale-hatti.component";
 
 @NgModule({
     imports:      [ HttpModule, CommonModule, CityRoutingModule,FormsModule,DialogModule,DataListModule,OrderListModule,OverlayPanelModule,
         TabViewModule,TreeTableModule,SharedModule,InputTextModule,SpinnerModule,DataTableModule ],
     declarations: [ STMMapComponent,STMCityListComponent,STMAppComponent,STMLayerList,STMMapStatusBar,STMMapToolbar,STMMapToolbarCreateProject,STMMapAttributeTable,
-        STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance,STMMapToolbarSaveMap,STMMapToolbarAddGeojson,Hakedis,STMMapToolbarAddKml,STMMapToolbarAddWMS],
+        STMMapToolbarGoToCoordinate,STMMapToolbarShow3d,STMMapToolbarAddShapefile, STMMapToolbarMeasureDistance,STMMapToolbarSaveMap,STMMapToolbarAddGeojson,Hakedis,STMMapToolbarAddKml,
+        STMMapToolbarAddWMS,STMMapToolbarAddWFS,STMAddIsaleHattiComponent],
     providers: [ requestOptionsProvider ],
     bootstrap:    [ STMAppComponent]
 })

@@ -1,15 +1,15 @@
 <table>
     <tr>
         <td>
-            <button ptooltip="WMS ekle" type="button" (click)="showDialog()" pButton>
-              WMS
+            <button ptooltip="WFS ekle" type="button" (click)="showDialog()" pButton>
+               WFS
             </button>
         </td>
     </tr>
 </table>
 
 
-<p-dialog [resizable]="false" header="WMS Ekle" class="dialog" showEffect="fade" [(visible)]="display">
+<p-dialog [resizable]="false" header="WFS Ekle" class="dialog" showEffect="fade" [(visible)]="display">
     <header>
         <div>
             <!--   <a href="#" id="popup-closer" class="ol-popup-closer"></a>-->
@@ -37,7 +37,7 @@
         <table style="width:100%; font-family: tahoma;font-size:11px">
             <tr>
                 <td>
-                    <button pButton type="text" (click)="addWMS()">Tamam</button>
+                    <button pButton type="text" (click)="addWFS()">Tamam</button>
                 </td>
                 <td>
                     <button pButton type="text" (click)="closeDialog()" icon="fa-close">Kapat</button>
